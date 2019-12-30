@@ -122,7 +122,7 @@
                                 </td>
                             </ng-container>
 
-                            <ng-container matColumnDef="Accion" >
+                            <ng-container matColumnDef="Accion">
                                 <th mat-header-cell *matHeaderCellDef> Accion </th>
                                 <td mat-cell *matCellDef="let element" ngFor="let element of dataSource2">  
                                     <button (click)="aceptar(element.id)" mat-mini-fab aria-label="Example icon-button with a heart icon" style="background-color: green; padding-right: 0px !important; width: 32px; height: 32px; border-radius: 4px;">
@@ -137,7 +137,7 @@
 
                             <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
                             <ng-container matColumnDef="expandedDetail">
-                                <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay2.length">
+                                <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay2.length" ngFor="let element of dataSource2">
                                     <div class="example-element-detail"
                                         [@detailExpand]="element == expandedElement2 ? 'expanded' : 'collapsed'"
                                         style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); transition: 0.3s; width: 100%;">
@@ -146,7 +146,7 @@
                                                 <div style="width: 33%; float: left;">
                                                     <h3>Datos Personales</h3>
 
-                                                    <p>Yupanqui Alarcon Alfredo</p>
+                                                    <p>{{element.Apellidos}} {{element.Nombres}}</p>
                                                     <p>Lima - Lima - Lima</p>
                                                     <p>Av. Alameda 2343</p>
                                                     <p>Masculino</p>
@@ -156,7 +156,7 @@
                                                     
                                                     <p>DNI: 704568545</p>
                                                     <p>01/12/2000</p>
-                                                    <p>alfredeveloper@gmail</p>
+                                                    <p>{{element.Correo}}</p>
                                                     <p>985454152</p>
                                                 </div>
                                                 <div style="width: 33%; float: left;">
