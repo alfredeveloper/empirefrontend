@@ -1,0 +1,77 @@
+
+
+
+
+<div>
+
+    <div class="content">
+
+        <div class="container" id="container">
+            
+            <div class="overlay-container">
+                <div class="overlay">
+                    <div class="overlay-panel overlay-right">
+                        <img src="assets/images/Isotipo.png" alt="" width="200px">
+                        <br>
+                        <h1>Inicia Sesión</h1>
+                        <p>Ingresa con tu cuenta de administrador</p>
+            
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            
+            <div class="form-container sign-up-container">
+                <form action="#">
+                    
+                    <h1>Ingresa el código de solicitud</h1>
+                    
+                    <br>
+    
+                    <mat-form-field>
+                        <input matInput placeholder="Código">
+                    </mat-form-field>
+    
+                    <!-- <mat-form-field appearance="outline">
+                        <mat-label>Código</mat-label>
+                        <input matInput>
+                        <mat-icon matSuffix>receipt</mat-icon>
+                    </mat-form-field> -->
+    
+                    <button class="button">INICIAR REGISTRO</button>
+                </form>
+            </div>
+    
+            <div class="form-container sign-in-container">
+                
+                <form action="">
+                    
+                    <h1>Ingreso a cuenta administrador</h1>
+    
+                    <br>
+                    
+                    <mat-form-field>
+                        <input matInput placeholder="Correo electrónico" [(ngModel)]="email" name="email">
+                    </mat-form-field>
+    
+                    <mat-form-field>
+                        <input matInput placeholder="Contraseña" [type]="hide ? 'password' : 'text'" [(ngModel)]="password" name="password">
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                    </mat-form-field>
+    
+                    <a style="cursor: pointer;" [routerLink]="['/olvidaste-tu-contraseña']">¿Olvidaste tu contraseña?</a>
+    
+                    <button class="button" (click)="acceder()">ACCEDER</button>
+                </form>
+    
+            </div>
+    
+        </div>
+    
+    </div>
+
+</div>
+  

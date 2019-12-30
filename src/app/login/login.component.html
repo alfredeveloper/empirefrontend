@@ -1,0 +1,451 @@
+
+<!-- DRAWER -->
+<mat-sidenav-container>
+    <mat-sidenav #sidenav [mode]="mode.value" position="end" style="width: 650px;" disableClose>
+
+        <button style="border-radius: 4px;" class="button-modal" mat-fab aria-label="Cerrar Modal" (click)="sidenav.close()" mat-disable-backdrop>
+            <mat-icon>close</mat-icon>
+        </button>
+
+        <mat-tab-group>
+            <mat-tab label="Eres una persona natural">
+                
+                <div class="natural-section">
+                    <h2 style="text-align: left;">Datos Personales</h2>
+
+                    <div class="sm-4 left">
+                        <mat-form-field>
+                            <input matInput placeholder="Apellido Paterno" [(ngModel)]="apellidoPaterno" name="apellidoPaterno">
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-label>Departamento</mat-label>
+                            <mat-select [(ngModel)]="departamento" name="departamento">
+                              <mat-option value="lima">Lima</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                    </div>
+
+                    <div class="sm-4 left">
+                        <mat-form-field>
+                            <input matInput placeholder="Apellido Materno" [(ngModel)]="apellidoMaterno" name="apellidoMaterno">
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-label>Provincia</mat-label>
+                            <mat-select [(ngModel)]="provincia" name="provincia">
+                              <mat-option value="lima">Lima</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                    </div>
+                    <div class="sm-4 left">
+                        <mat-form-field>
+                            <input matInput placeholder="Nombres" [(ngModel)]="nombres" name="nombres">
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-label>Distrito</mat-label>
+                            <mat-select [(ngModel)]="distrito" name="distrito">
+                              <mat-option value="lima">Lima</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+                
+                <div class="natural-section">
+                    <div class="sm-4 left">
+                        <mat-form-field>
+                            <input matInput placeholder="Dirección" [(ngModel)]="direccion" name="direccion">
+                        </mat-form-field>
+                    </div>
+                    <div class="sm-4 left">
+                        <mat-form-field>
+                            <mat-label>Sexo</mat-label>
+                            <mat-select [(ngModel)]="genero" name="genero">
+                              <mat-option value="masculino">Masculino</mat-option>
+                              <mat-option value="femenino">Femenino</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="natural-section">
+
+                    <h2 style="text-align: left;">Datos de identificación</h2>
+                    <div class="sm-4 left">
+
+                        <mat-form-field>
+                            <mat-label>Tipo de documento</mat-label>
+                            <mat-select [(ngModel)]="tipoDocumento" name="tipoDocumento">
+                              <mat-option value="01">DNI</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                    </div>
+
+                    <div class="sm-4 left">
+                        <mat-form-field>
+                            <input matInput placeholder="Numero Documento" [(ngModel)]="numdoc" name="numdoc">
+                        </mat-form-field>
+
+                    </div>
+
+                    <div class="sm-4 left">
+                        <mat-form-field>
+                            <input matInput [matDatepicker]="picker" placeholder="Fecha de nacimiento" [(ngModel)]="fechaNacimiento" name="fechaNacimiento">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                        
+                    </div>
+
+                </div>
+
+                <div class="natural-section">
+
+                    <div class="sm-4 left">
+                        <mat-form-field>
+                            <input matInput placeholder="Correo Electrónico" [(ngModel)]="correoElectronico" name="correoElectronico">
+                        </mat-form-field>
+
+                    </div>
+
+                    <div class="sm-4 left">
+                        <mat-form-field>
+                            <input matInput placeholder="Teléfono" [(ngModel)]="telefono" name="telefono">
+                        </mat-form-field>
+
+                    </div>
+                </div>
+
+                <div class="natural-section">
+                    <h2 style="text-align: left;">Datos Laborales</h2>
+
+                    <div class="sm-4 left">
+                        <mat-form-field>
+                            <input matInput placeholder="Profesión / Educación" [(ngModel)]="ocupacion" name="ocupacion">
+                        </mat-form-field>
+
+                    </div>
+
+                    <div class="sm-4 left">
+                        <mat-form-field>
+                            <input matInput placeholder="Centro de labores" [(ngModel)]="centroLaboral" name="centroLaboral">
+                        </mat-form-field>
+
+                    </div>
+                </div>
+
+                <div class="natural-section">
+                    <button class="button" (click)="actualizarDatosPersonales(sidenav)">ENVIAR DATOS</button>
+
+                </div>
+
+            </mat-tab>
+            <mat-tab label="Eres una persona jurídica"> 
+                    
+                <div class="natural-section">
+
+                    <h2 style="text-align: left;">Datos empresariales</h2>
+
+                    <div class=" -4 left">
+                        <mat-form-field>
+                            <input matInput placeholder="Razón Social" [(ngModel)]="razonSocial" name="razonSocial">
+                        </mat-form-field>
+                        
+                    </div>
+
+                    <div class="sm-4 left">
+                        <mat-form-field>
+                            <input matInput placeholder="R.U.C." [(ngModel)]="ruc" name="ruc">
+                        </mat-form-field>
+                    </div>
+                    
+                    <div class="sm-4 left">
+                        <mat-form-field>
+                            <input matInput placeholder="Partida Registral" [(ngModel)]="partidaRegistral" name="partidaRegistral">
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="natural-section">
+                    <div class="sm-4 left">
+                        <mat-form-field>
+                            <mat-label>Departamento</mat-label>
+                            <mat-select [(ngModel)]="departamentoJuridico" name="departamentoJuridico">
+                                <mat-option value="lima">Lima</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="sm-4 left">
+                        <mat-form-field>
+                            <mat-label>Provincia</mat-label>
+                            <mat-select [(ngModel)]="provinciaJuridico" name="provinciaJuridico">
+                                <mat-option value="lima">Lima</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="sm-4 left">
+                        <mat-form-field>
+                            <mat-label>Distrito</mat-label>
+                            <mat-select [(ngModel)]="distritoJuridico" name="distritoJuridico">
+                                <mat-option value="lima">Lima</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="natural-section">
+                    <div class="sm-4 left">
+                        <mat-form-field>
+                            <input matInput placeholder="Dirección" [(ngModel)]="direccionJuridico" name="direccionJuridico">
+                        </mat-form-field>
+                    </div>
+                    <div class="sm-4 left">
+                        <mat-form-field>
+                            <mat-label>Sede registral</mat-label>
+                            <mat-select [(ngModel)]="sedeRegistral" name="sedeRegistral">
+                                <mat-option value="">Sede 1</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="sm-4 left">
+                        <mat-form-field >
+                            <input matInput placeholder="Teléfono" [(ngModel)]="telefonoJuridico" name="telefonoJuridico">
+                        </mat-form-field>
+                    </div>
+
+                </div>
+                <div class="natural-section">
+                    <h2 style="text-align: left;">Datos De Representante Legal</h2>
+                    <h3 style="text-align: left;">Datos Personales</h3>
+
+                    <div class="sm-4 left">
+                        <mat-form-field>
+                            <input matInput placeholder="Apellido Paterno" [(ngModel)]="apellidoPaternoJuridico" name="apellidoPaternoJuridico">
+                        </mat-form-field>
+                        
+                    </div>
+
+                    <div class="sm-4 left">
+                        <mat-form-field>
+                            <input matInput placeholder="Apellido Materno" [(ngModel)]="apellidoMaternoJuridico" name="apellidoMaternoJuridico">
+                        </mat-form-field>
+
+                    </div>
+                    
+                    <div class="sm-4 left">
+                        <mat-form-field>
+                            <input matInput placeholder="Nombres" [(ngModel)]="nombresJuridico" name="nombresJuridico">
+                        </mat-form-field>
+
+                        
+
+                        
+                    </div>
+                </div>
+
+                <div class="natural-section">
+                    <div class="sm-4 left">
+                        <mat-form-field>
+                            <mat-label>Departamento</mat-label>
+                            <mat-select [(ngModel)]="departamentoJuridicoPersona" name="departamentoJuridicoPersona">
+                                <mat-option value="">Lima</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="sm-4 left">
+                        <mat-form-field>
+                            <mat-label>Provincia</mat-label>
+                            <mat-select [(ngModel)]="provinciaJuridicoPersona" name="provinciaJuridicoPersona">
+                                <mat-option value="">Lima</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="sm-4 left">
+                        <mat-form-field>
+                            <mat-label>Distrito</mat-label>
+                            <mat-select [(ngModel)]="distritoJuridicoPersona" name="distritoJuridicoPersona">
+                                <mat-option value="">Lima</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="natural-section">
+                    <div class="sm-4 left">
+                        <mat-form-field>
+                            <input matInput placeholder="Dirección" [(ngModel)]="direccionJuridicoPersona" name="direccionJuridicoPersona">
+                        </mat-form-field>
+                    </div>
+                    <div class="sm-4 left">
+                        <mat-form-field>
+                            <mat-label>Sexo</mat-label>
+                            <mat-select [(ngModel)]="generoJuridico" name="generoJuridico">
+                                <mat-option value="masculino">Masculino</mat-option>
+                                <mat-option value="femenino">Femenino</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="natural-section">
+                    <h3 style="text-align: left;">Datos de identificación</h3>
+                    <div class="sm-4 left">
+
+                        <mat-form-field>
+                            <mat-label>Tipo Doc. Identidad</mat-label>
+                            <mat-select [(ngModel)]="tipoDocumentoJuridico" name="tipoDocumentoJuridico">
+                                <mat-option value="">DNI</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                    </div>
+
+                    <div class="sm-4 left">
+                        
+                        <mat-form-field>
+                            <input matInput placeholder="Número Doc. Identidad" [(ngModel)]="numeroDocumentoJuridico" name="numeroDocumentoJuridico">
+                        </mat-form-field>
+                        
+                    </div>
+                    
+                    <div class="sm-4 left">
+                        
+                        <mat-form-field>
+                            <input matInput [matDatepicker]="picker1" placeholder="Fecha de nacimiento" [(ngModel)]="fechaNacimientoJuridico" name="fechaNacimientoJuridico">
+                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
+                        </mat-form-field>
+                        
+                    </div>
+                </div>
+
+                <div class="natural-section">
+                    <div class="sm-4 left">
+                        <mat-form-field>
+                            <input matInput placeholder="Correo Electrónico" [(ngModel)]="correoElectronicoJuridico" name="correoElectronicoJuridico">
+                        </mat-form-field>
+                    </div>
+                    <div class="sm-4 left">
+                        <mat-form-field>
+                            <input matInput placeholder="Teléfono" [(ngModel)]="telefonoJuridicoPersona" name="telefonoJuridicoPersona">
+                        </mat-form-field>
+                    </div>
+                    <div class="sm-4 left"></div>
+                </div>
+                
+                <div class="natural-section">
+                    
+                    <h3 style="text-align: left;">Datos Laborales</h3>
+                    <div class="sm-4 left">
+                        <mat-form-field>
+                            <input matInput placeholder="Profesión / Ocupación" [(ngModel)]="ocupacionJuridico" name="ocupacionJuridico">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="sm-4 left">
+                        <mat-form-field>
+                            <input matInput placeholder="Centro de Labores" [(ngModel)]="centroLaboralJuridico" name="centroLaboralJuridico">
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="natural-section">
+
+                    <button class="button" (click)="actualizarDatosJuridicos(sidenav)">ENVIAR DATOS</button>
+
+                </div>
+                                        
+            </mat-tab>
+        </mat-tab-group>
+
+        <div class="natural-section" style="overflow: hidden;">
+
+            <div class="sm-4 left">
+                <mat-checkbox>Acepto los términos del servicio & política de privacidad</mat-checkbox>
+            </div>
+        
+        </div>
+    
+    </mat-sidenav>
+  
+    <mat-sidenav-content>
+
+            <div class="content">
+        
+                <div class="container" id="container">
+                    
+                    <div class="overlay-container">
+                        <div class="overlay">
+                            <div class="overlay-panel overlay-right">
+                                <img src="assets/images/Isotipo.png" alt="" width="200px">
+                                <br>
+                                <h1>¿Tienes un código de registro?</h1>
+                                <p>Ingresa el código de registro para proceder a la evaluación</p>
+                    
+                                <button class="ghost button" id="signUp" >INGRESAR</button>
+                            </div>
+                            
+                            <div class="overlay-panel overlay-left">
+                                <img src="assets/images/Isotipo.png" alt="" width="200px">
+                                <br>
+                                <h1>¿Recordaste tus accesos?</h1>
+                                <p>Regresa al login para acceder con tus datos</p>
+                                <button class="ghost button" id="signIn">REGRESAR</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-container sign-up-container">
+                        <form action="#">
+                            
+                            <h1>Ingresa el código de solicitud</h1>
+                            
+                            <br>
+            
+                            <mat-form-field>
+                                <input matInput placeholder="Código" [(ngModel)] = "codigo" name="codigo">
+                            </mat-form-field>
+            
+                            <button class="button" (click)="ingresarCodigo(sidenav)">INICIAR REGISTRO</button>
+                        </form>
+                    </div>
+            
+                    <div class="form-container sign-in-container">
+                        
+                        <form action="">
+                            
+                            <h1>Ingreso a cuenta personal</h1>
+            
+                            <br>
+                            
+                            <mat-form-field>
+                                <input matInput placeholder="Correo electrónico" [(ngModel)]="email" name="email">
+                            </mat-form-field>
+            
+                            <mat-form-field>
+                                <input matInput placeholder="Contraseña" [type]="hide ? 'password' : 'text'" [(ngModel)]="password" name="password">
+                                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                </button>
+                            </mat-form-field>
+            
+                            
+            
+                            <a style="cursor: pointer;" [routerLink]="['/olvidaste-tu-contraseña']">¿Olvidaste tu contraseña?</a>
+            
+                            <button class="button" (click)="acceder()">ACCEDER</button>
+                        </form>
+            
+                    </div>
+            
+                </div>
+            
+            </div>
+
+    </mat-sidenav-content>
+</mat-sidenav-container>
+  

@@ -1,0 +1,434 @@
+
+
+
+<!-- DRAWER -->
+<mat-sidenav-container>
+    <mat-sidenav #sidenav [mode]="mode.value">
+
+        <div class="cabecera">
+            <img src="https://www.give.garden/img/front/images/users/default_user.png" alt="" width="50px" style="border-radius: 50%;">
+            <p style="color: white; font-size: 14px;">
+                alfredeveloper@gmail.com
+            </p>
+        </div>
+        <div style="width: 300px;">
+            <mat-list>
+                <mat-list-item [routerLink]="['/admin-cliente']"> 
+                    <mat-icon aria-hidden="false" aria-label="Example home icon">bar_chart</mat-icon>
+                    Estadísticas 
+                </mat-list-item>
+                <mat-list-item [routerLink]="['/admin-cliente-configuration']"> 
+                    <mat-icon aria-hidden="false" aria-label="Example home icon">branding_watermark</mat-icon>
+                    
+                    Configuracion de cuenta
+                 </mat-list-item>
+                <mat-list-item [routerLink]="['/admin-cliente-chat']"> 
+                    <mat-icon aria-hidden="false" aria-label="Example home icon">chat</mat-icon>
+                    
+                    Chat 
+                </mat-list-item>
+                <mat-list-item [routerLink]="['/admin-cliente-help']"> 
+                    <mat-icon aria-hidden="false" aria-label="Example home icon">help</mat-icon>
+                    
+                    Ayuda 
+                </mat-list-item>
+                <mat-list-item [routerLink]="['/iniciar-sesion']"> 
+                    <mat-icon aria-hidden="false" aria-label="Example home icon">exit_to_app</mat-icon>
+                    
+                    Cerrar sesión 
+                </mat-list-item>
+            </mat-list>
+        </div>
+    
+    </mat-sidenav>
+  
+    <mat-sidenav-content>
+
+        <div>
+
+            <ul class="navbar">
+                
+                <li class="item-navbar">
+                    <mat-icon (click)="sidenav.toggle()" style="color: white;">menu</mat-icon>
+                </li>
+                <li class="item-navbar" style="color: white;">Hola, Gustavo Paul</li>
+                <li class="item-navbar" style="float: right;">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon" style="color: white;">account_circle</mat-icon>
+                </li>
+                <li class="item-navbar" style="float: right;">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon" style="color: white;">notifications</mat-icon>
+                </li>
+                
+            </ul>
+        </div>
+
+        <div style="padding: 35px;">
+
+            <h2>Configuracion</h2>
+
+            <div style="background-color: white; padding: 20px;" *ngIf="isNatural">
+
+                <h3>Persona Natural</h3>
+                <div class="natural-section">
+                    <div class="sm-3 left">
+                        <mat-form-field>
+                            <input matInput placeholder="Nombres" [(ngModel)]="nombres" name="nombres">
+                          </mat-form-field>
+                        
+                    </div>
+
+                    <div class="sm-3 left">
+                        <mat-form-field>
+                            <input matInput placeholder="Apellido Paterno" [(ngModel)]="apellidoPaterno" name="apellidoPaterno">
+                          </mat-form-field>
+                        
+                    </div>
+
+                    <div class="sm-3 left">
+                        <mat-form-field>
+                            <input matInput placeholder="Apellido Materno" [(ngModel)]="apellidoPaterno" name="apellidoPaterno">
+                          </mat-form-field>
+                        
+                    </div>
+
+                    <div class="sm-3 left">
+                        <mat-form-field>
+                            <mat-label>Genero</mat-label>
+                            <select matNativeControl required [(ngModel)]="sexo" name="sexo">
+                              <option value="masculino">Masculino</option>
+                              <option value="femenino">Femenino</option>
+                            </select>
+                        </mat-form-field>
+                        
+                    </div>
+                </div>
+
+                <div class="natural-section">
+                    <div class="sm-3 left">
+                        <mat-form-field>
+                            <mat-label>Departamento</mat-label>
+                            <select matNativeControl required [(ngModel)]="departamento" name="departamento">
+                              <option value="lima">Lima</option>
+                            </select>
+                        </mat-form-field>
+                        
+                    </div>
+
+                    <div class="sm-3 left">
+                        <mat-form-field>
+                            <mat-label>Provincia</mat-label>
+                            <select matNativeControl required [(ngModel)]="provincia" name="provincia">
+                              <option value="lima">Lima</option>
+                            </select>
+                        </mat-form-field>
+                        
+                    </div>
+
+                    <div class="sm-3 left">
+                        <mat-form-field>
+                            <mat-label>Distrito</mat-label>
+                            <select matNativeControl required [(ngModel)]="distrito" name="distrito">
+                              <option value="lima">Lima</option>
+                            </select>
+                        </mat-form-field>
+                        
+                    </div>
+
+                    <div class="sm-3 left">
+                        <mat-form-field>
+                            <input matInput placeholder="Direccion" [(ngModel)]="direccion" name="direccion">
+                          </mat-form-field>
+                        
+                    </div>
+                </div>
+
+                <div class="natural-section">
+                    <div class="sm-3 left">
+                        <mat-form-field>
+                            <mat-label>Tipo de Documento</mat-label>
+                            <select matNativeControl required [(ngModel)]="tipoDocIdentidad" name="tipoDocIdentidad">
+                              <option value="01">DNI</option>
+                            </select>
+                        </mat-form-field>
+                        
+                    </div>
+
+                    <div class="sm-3 left">
+                        <mat-form-field>
+                            <input matInput placeholder="Número Doc. Identidad" [(ngModel)]="numDocumento" name="numDocumento">
+                          </mat-form-field>
+                        
+                    </div>
+
+                    <div class="sm-3 left">
+                        <mat-form-field>
+                            <input matInput [matDatepicker]="picker" placeholder="Fecha Nacimiento" [(ngModel)]="fechaNacimiento" name="fechaNacimiento">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="sm-3 left">
+                        <mat-form-field>
+                            <input matInput placeholder="Teléfono" [(ngModel)]="telefono" name="telefono">
+                        </mat-form-field>
+                        
+                    </div>
+                </div>
+
+                <div class="natural-section">
+                    
+
+                    <div class="sm-3 left">
+                        <mat-form-field>
+                            <input matInput placeholder="Profesión / Ocupación" [(ngModel)]="profesion" name="profesion">
+                          </mat-form-field>
+                        
+                    </div>
+
+                    
+
+                    <div class="sm-3 left">
+                        <mat-form-field>
+                            <input matInput placeholder="Centro de Labores" [(ngModel)]="centroLaboral" name="centroLaboral">
+                        </mat-form-field>
+                        
+                    </div>
+                </div>
+
+                <div class="natural-section" style="padding: 10px;">
+                    <button mat-raised-button color="primary" (click)="solicitarModificacionNatural()">Solicitar Modificación</button>
+                        &nbsp;
+                    <button mat-raised-button>Cancelar</button>
+                </div>
+            </div>
+
+            <div style="background-color: white; padding: 20px;" *ngIf="!isNatural">
+                <h3>Persona Jurídica</h3>
+
+                
+                <div class="natural-section">
+                    <div class="sm-3 left">
+                        <mat-form-field>
+                            <input matInput placeholder="Razon Social" [(ngModel)]="razonSocial" name="razonSocial">
+                          </mat-form-field>
+                        
+                    </div>
+
+                    <div class="sm-3 left">
+                        <mat-form-field>
+                            <input matInput placeholder="R.U.C." [(ngModel)]="ruc" name="ruc">
+                          </mat-form-field>
+                        
+                    </div>
+
+                    <div class="sm-3 left">
+                        <mat-form-field>
+                            <input matInput placeholder="Partida Registral" [(ngModel)]="partidaRegistral" name="partidaRegistral">
+                          </mat-form-field>
+                        
+                    </div>
+
+                    <div class="sm-3 left">
+                        <mat-form-field>
+                            <mat-label>Sede Registral</mat-label>
+                            <select matNativeControl required [(ngModel)]="sedeRegistral" name="sedeRegistral">
+                              <option value="sede1">Sede 1</option>
+                              <option value="sede2">Sede 2</option>
+                            </select>
+                        </mat-form-field>
+                        
+                    </div>
+                </div>
+
+                <div class="natural-section">
+                    <div class="sm-3 left">
+                        <mat-form-field>
+                            <mat-label>Departamento</mat-label>
+                            <select matNativeControl required [(ngModel)]="departamentoEmpresa" name="departamentoEmpresa">
+                              <option value="lima">Lima</option>
+                            </select>
+                        </mat-form-field>
+                        
+                    </div>
+
+                    <div class="sm-3 left">
+                        <mat-form-field>
+                            <mat-label>Provincia</mat-label>
+                            <select matNativeControl required [(ngModel)]="provinciaEmpresa" name="provinciaEmpresa">
+                              <option value="lima">Lima</option>
+                            </select>
+                        </mat-form-field>
+                        
+                    </div>
+
+                    <div class="sm-3 left">
+                        <mat-form-field>
+                            <mat-label>Distrito</mat-label>
+                            <select matNativeControl required [(ngModel)]="distritoEmpresa" name="distritoEmpresa">
+                              <option value="lima">Lima</option>
+                            </select>
+                        </mat-form-field>
+                        
+                    </div>
+
+                    <div class="sm-3 left">
+                        <mat-form-field>
+                            <input matInput placeholder="Direccion" [(ngModel)]="direccionEmpresa" name="direccionEmpresa">
+                          </mat-form-field>
+                        
+                    </div>
+                </div>
+
+                <div class="natural-section">
+                    
+                    <div class="sm-3 left">
+                        <mat-form-field>
+                            <input matInput placeholder="Telefono" [(ngModel)]="telefonoEmpresa" name="telefonoEmpresa">
+                          </mat-form-field>
+                        
+                    </div>
+
+                   
+                </div>
+
+                <h4>Datos de representante legal</h4>
+
+                <div class="natural-section">
+                    <div class="sm-3 left">
+                        <mat-form-field>
+                            <input matInput placeholder="Nombres" [(ngModel)]="nombresRepresentante" name="nombresRepresentante">
+                          </mat-form-field>
+                        
+                    </div>
+
+                    <div class="sm-3 left">
+                        <mat-form-field>
+                            <input matInput placeholder="Apellido Paterno" [(ngModel)]="apellidoPaternoRepresentante" name="apellidoPaternoRepresentante">
+                          </mat-form-field>
+                        
+                    </div>
+
+                    <div class="sm-3 left">
+                        <mat-form-field>
+                            <input matInput placeholder="Apellido Materno" [(ngModel)]="apellidoMaternoRepresentante" name="apellidoMaternoRepresentante">
+                          </mat-form-field>
+                        
+                    </div>
+
+                    <div class="sm-3 left">
+                        <mat-form-field>
+                            <mat-label>Genero</mat-label>
+                            <select matNativeControl required [(ngModel)]="sexoRepresentante" name="sexoRepresentante">
+                              <option value="masculino">Masculino</option>
+                              <option value="femenino">Femenino</option>
+                            </select>
+                        </mat-form-field>
+                        
+                    </div>
+                </div>
+
+                <div class="natural-section">
+                    <div class="sm-3 left">
+                        <mat-form-field>
+                            <mat-label>Departamento</mat-label>
+                            <select matNativeControl required [(ngModel)]="departamentoRepresentante" name="departamentoRepresentante">
+                              <option value="lima">Lima</option>
+                            </select>
+                        </mat-form-field>
+                        
+                    </div>
+
+                    <div class="sm-3 left">
+                        <mat-form-field>
+                            <mat-label>Provincia</mat-label>
+                            <select matNativeControl required [(ngModel)]="provinciaRepresentante" name="provinciaRepresentante">
+                              <option value="lima">Lima</option>
+                            </select>
+                        </mat-form-field>
+                        
+                    </div>
+
+                    <div class="sm-3 left">
+                        <mat-form-field>
+                            <mat-label>Distrito</mat-label>
+                            <select matNativeControl required [(ngModel)]="distritoRepresentante" name="distritoRepresentante">
+                              <option value="lima">Lima</option>
+                            </select>
+                        </mat-form-field>
+                        
+                    </div>
+
+                    <div class="sm-3 left">
+                        <mat-form-field>
+                            <input matInput placeholder="Direccion" [(ngModel)]="direccionRepresentante" name="direccionRepresentante">
+                          </mat-form-field>
+                        
+                    </div>
+                </div>
+
+                <div class="natural-section">
+                    <div class="sm-3 left">
+                        <mat-form-field>
+                            <mat-label>Tipo de Documento</mat-label>
+                            <select matNativeControl required [(ngModel)]="tipoDocIdentidadRepresentante" name="tipoDocIdentidadRepresentante">
+                              <option value="01">DNI</option>
+                            </select>
+                        </mat-form-field>
+                        
+                    </div>
+
+                    <div class="sm-3 left">
+                        <mat-form-field>
+                            <input matInput placeholder="Número Doc. Identidad" [(ngModel)]="numDocumentoRepresentante" name="numDocumentoRepresentante">
+                          </mat-form-field>
+                        
+                    </div>
+
+                    <div class="sm-3 left">
+                        <mat-form-field>
+                            <input matInput [matDatepicker]="picker" placeholder="Fecha Nacimiento" [(ngModel)]="fechaNacimientoRepresentante" name="fechaNacimientoRepresentante">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="sm-3 left">
+                        <mat-form-field>
+                            <input matInput placeholder="Teléfono" [(ngModel)]="telefonoRepresentante" name="telefonoRepresentante">
+                        </mat-form-field>
+                        
+                    </div>
+                </div>
+
+                <div class="natural-section">
+                    
+
+                    <div class="sm-3 left">
+                        <mat-form-field>
+                            <input matInput placeholder="Profesión / Ocupación" [(ngModel)]="profesionRepresentante" name="profesionRepresentante">
+                          </mat-form-field>
+                        
+                    </div>
+
+                    
+
+                    <div class="sm-3 left">
+                        <mat-form-field>
+                            <input matInput placeholder="Centro de Labores" [(ngModel)]="centroLaboralRepresentante" name="centroLaboralRepresentante">
+                        </mat-form-field>
+                        
+                    </div>
+                </div>
+
+                <div class="natural-section" style="padding: 10px;">
+                    <button mat-raised-button color="primary" (click)="solicitarModificacionJuridica()">Solicitar Modificación</button>
+                    &nbsp;
+                    <button mat-raised-button>Cancelar</button>
+                </div>
+            </div>
+        </div>
+
+    </mat-sidenav-content>
+</mat-sidenav-container>
+  

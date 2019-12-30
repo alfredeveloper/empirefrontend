@@ -1,0 +1,421 @@
+<div class="content">
+    
+    <div class="container" id="container">
+        
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-right">
+
+                    <img src="assets/images/Isotipo.png" alt="" width="200px">
+                    
+                    <br>
+                    
+                    <h1>¿Tienes un código de registro?</h1>
+                    
+                    <p>Ingresa el código de registro para proceder a la evaluación</p>
+        
+                    <button class="ghost" id="signUp">INGRESAR</button>
+
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="form-container sign-in-container">
+            
+            <mat-tab-group>
+                <mat-tab label="Eres una persona natural">
+                    
+                    <div class="natural-section">
+                        <h2>Datos Personales</h2>
+
+                        <div class="sm-4 left">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Apellido Paterno</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+
+                            <mat-form-field>
+                                <mat-label>Departamento</mat-label>
+                                <mat-select>
+                                  <mat-option value="">Lima</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                        </div>
+
+                        <div class="sm-4 left">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Apellido Materno</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+
+                            <mat-form-field>
+                                <mat-label>Provincia</mat-label>
+                                <mat-select>
+                                  <mat-option value="">Lima</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                        </div>
+                        <div class="sm-4 left">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Nombres</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Distrito</mat-label>
+                                <mat-select>
+                                  <mat-option value="">Lima</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    
+                    <div class="natural-section">
+                        <div class="sm-4 left">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Dirección</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+                        </div>
+                        <div class="sm-4 left">
+                            <mat-form-field>
+                                <mat-label>Sexo</mat-label>
+                                <mat-select>
+                                  <mat-option value="">Masculino</mat-option>
+                                  <mat-option value="">Femenino</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="natural-section">
+
+                        <h2>Datos de identificación</h2>
+                        <div class="sm-4 left">
+
+                            <mat-form-field>
+                                <mat-label>Departamento</mat-label>
+                                <mat-select>
+                                  <mat-option value="">Lima</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                        </div>
+
+                        <div class="sm-4 left">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Número Doc. Identidad</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+
+                        </div>
+
+                        <div class="sm-4 left">
+                            <mat-form-field>
+                                <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                            
+                        </div>
+
+                    </div>
+
+                    <div class="natural-section">
+
+                        <div class="sm-4 left">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Correo electrónico</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+
+                        </div>
+
+                        <div class="sm-4 left">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Teléfono</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+
+                        </div>
+                    </div>
+
+                    <div class="natural-section">
+                        <h2>Datos Laborales</h2>
+
+                        <div class="sm-4 left">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Profesión / Educación</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+
+                        </div>
+
+                        <div class="sm-4 left">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Centro de labores</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+
+                        </div>
+                    </div>
+
+                    <div class="natural-section">
+                        <button>ENVIAR DATOS</button>
+
+                    </div>
+
+                </mat-tab>
+                <mat-tab label="Eres una persona jurídica"> 
+                        
+                    <div class="natural-section">
+                        <h2>Datos empresariales</h2>
+
+                        <div class="sm-4 left">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Apellido Paterno</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+                            
+                        </div>
+
+                        <div class="sm-4 left">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Apellido Materno</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+                        </div>
+                        
+                        <div class="sm-4 left">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Nombres</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="natural-section">
+                        <div class="sm-4 left">
+                            <mat-form-field>
+                                <mat-label>Departamento</mat-label>
+                                <mat-select>
+                                <mat-option value="">Lima</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="sm-4 left">
+                            <mat-form-field>
+                                <mat-label>Provincia</mat-label>
+                                <mat-select>
+                                <mat-option value="">Lima</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="sm-4 left">
+                            <mat-form-field>
+                                <mat-label>Distrito</mat-label>
+                                <mat-select>
+                                <mat-option value="">Lima</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="natural-section">
+                        <div class="sm-4 left">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Dirección</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+                        </div>
+                        <div class="sm-4 left">
+                            <mat-form-field>
+                                <mat-label>Sede registral</mat-label>
+                                <mat-select>
+                                <mat-option value="">Sede 1</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="sm-4 left">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Teléfono</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+                    <div class="natural-section">
+                        <h2>Datos De Representante Legal</h2>
+                        <h3>Datos Personales</h3>
+
+                        <div class="sm-4 left">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Apellido Paterno</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+
+                            
+
+                            
+                        </div>
+
+                        <div class="sm-4 left">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Apellido Materno</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+
+                            
+
+                            
+
+                        </div>
+                        
+                        <div class="sm-4 left">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Nombres</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+
+                            
+
+                            
+                        </div>
+                    </div>
+
+                    <div class="natural-section">
+                        <div class="sm-4 left">
+                            <mat-form-field>
+                                <mat-label>Departamento</mat-label>
+                                <mat-select>
+                                <mat-option value="">Lima</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="sm-4 left">
+                            <mat-form-field>
+                                <mat-label>Provincia</mat-label>
+                                <mat-select>
+                                <mat-option value="">Lima</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="sm-4 left">
+                            <mat-form-field>
+                                <mat-label>Distrito</mat-label>
+                                <mat-select>
+                                <mat-option value="">Lima</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="natural-section">
+                        <div class="sm-4 left">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Dirección</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+                        </div>
+                        <div class="sm-4 left">
+                            <mat-form-field>
+                                <mat-label>Sexo</mat-label>
+                                <mat-select>
+                                    <mat-option value="">Masculino</mat-option>
+                                    <mat-option value="">Femenino</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="natural-section">
+                        <h3>Datos de identificación</h3>
+                        <div class="sm-4 left">
+
+                            <mat-form-field>
+                                <mat-label>Tipo Doc. Identidad</mat-label>
+                                <mat-select>
+                                <mat-option value="">DNI</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                        </div>
+
+                        <div class="sm-4 left">
+                            
+                            <mat-form-field appearance="outline">
+                                <mat-label>Número Doc. Identidad</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+                            
+                        </div>
+                        
+                        <div class="sm-4 left">
+                            
+                            <mat-form-field>
+                                <input matInput [matDatepicker]="picker1" placeholder="Choose a date">
+                                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                <mat-datepicker #picker1></mat-datepicker>
+                            </mat-form-field>
+                            
+                        </div>
+                    </div>
+
+                    <div class="natural-section">
+                        <div class="sm-4 left">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Correo electrónico</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+                        </div>
+                        <div class="sm-4 left">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Teléfono</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+                        </div>
+                        <div class="sm-4 left"></div>
+                    </div>
+                    
+                    <div class="natural-section">
+                        
+                        <h3>Datos Laborales</h3>
+                        <div class="sm-4 left">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Profesión / Ocupación</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="sm-4 left">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Centro de Labores</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="natural-section">
+
+                        <button>ENVIAR DATOS</button>
+
+                    </div>
+                                            
+                </mat-tab>
+            </mat-tab-group>
+
+            <div class="natural-section" style="overflow: hidden;">
+
+                <div class="sm-4 left">
+                    <mat-checkbox>Acepto los términos del servicio & política de privacidad</mat-checkbox>
+                </div>
+            
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
