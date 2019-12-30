@@ -34,7 +34,7 @@ const AppRoutes: Routes = [
   { path: 'admin-administrador-cliente', component: AdminAdminClientComponent },
   { path: 'admin-administrador-chat', component: AdminAdminChatComponent },
   { path: 'admin-administrador-ayuda', component: AdminAdminHelpComponent },
-  { path: '**', component: ErrorComponent },
+  { path: '**', component: LoginComponent },
   { path: '', redirectTo: '/iniciar-sesion', pathMatch: 'full' }
 
 ];
