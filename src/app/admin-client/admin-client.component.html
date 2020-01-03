@@ -14,26 +14,26 @@
         <div style="width: 300px;">
             <mat-list>
                 <mat-list-item [routerLink]="['/admin-cliente']"> 
-                    <mat-icon aria-hidden="false" aria-label="Example home icon">bar_chart</mat-icon>
-                    Estadísticas 
+                    <mat-icon class="mat-drawer-icon" aria-hidden="false" aria-label="Example home icon">bar_chart</mat-icon>
+                    Capítal de Inversión 
                 </mat-list-item>
                 <mat-list-item [routerLink]="['/admin-cliente-configuration']"> 
-                    <mat-icon aria-hidden="false" aria-label="Example home icon">branding_watermark</mat-icon>
+                    <mat-icon class="mat-drawer-icon" aria-hidden="false" aria-label="Example home icon">branding_watermark</mat-icon>
                     
                     Configuracion de cuenta
                  </mat-list-item>
-                <mat-list-item [routerLink]="['/admin-cliente-chat']"> 
-                    <mat-icon aria-hidden="false" aria-label="Example home icon">chat</mat-icon>
+                 <mat-list-item [routerLink]="['/admin-cliente-cambio-contraseña']"> 
+                    <mat-icon class="mat-drawer-icon" aria-hidden="false" aria-label="Example home icon">lock</mat-icon>
                     
-                    Chat 
+                    Cambio de contraseña
                 </mat-list-item>
                 <mat-list-item [routerLink]="['/admin-cliente-help']"> 
-                    <mat-icon aria-hidden="false" aria-label="Example home icon">help</mat-icon>
+                    <mat-icon class="mat-drawer-icon" aria-hidden="false" aria-label="Example home icon">help</mat-icon>
                     
-                    Ayuda 
+                    Ayuda   
                 </mat-list-item>
                 <mat-list-item [routerLink]="['/iniciar-sesion']"> 
-                    <mat-icon aria-hidden="false" aria-label="Example home icon">exit_to_app</mat-icon>
+                    <mat-icon class="mat-drawer-icon" aria-hidden="false" aria-label="Example home icon">exit_to_app</mat-icon>
                     
                     Cerrar sesión 
                 </mat-list-item>
@@ -56,7 +56,12 @@
                     <mat-icon aria-hidden="false" aria-label="Example home icon" style="color: white;">account_circle</mat-icon>
                 </li>
                 <li class="item-navbar" style="float: right;">
-                    <mat-icon aria-hidden="false" aria-label="Example home icon" style="color: white;">notifications</mat-icon>
+                    <button mat-button [matMenuTriggerFor]="menu">
+                        <mat-icon aria-hidden="false" aria-label="Example home icon"  matBadge="1" matBadgeColor="warn" style="color: white;">notifications</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item> <mat-icon>keyboard_arrow_right</mat-icon> Solicitud de actualización aceptada</button>
+                    </mat-menu>
                 </li>
                 
             </ul>
@@ -67,8 +72,11 @@
             <h2>Balance Mensual</h2>
 
             <div style="margin-bottom: 20px;">
-                <button mat-raised-button (click)="addColumn()"> Mayo 2019 </button>
-
+                <mat-form-field class="example-full-width">
+                    <input matInput [matDatepicker]="picker" placeholder="Mes">
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <button mat-raised-button (click)="picker.open()">Mayo 2019</button>
             </div>
             <table mat-table [dataSource]="data" class="mat-elevation-z8" style="width: 100%;">
             <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">

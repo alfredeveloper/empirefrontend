@@ -14,10 +14,24 @@ export interface PeriodicElement1 {
   accion: string;
 }
 
+export interface PeriodicElement2 {
+  ticket: string;
+  solicitud: string;
+  fecha_solicitud: string;
+  fecha_Respuesta: string;
+  resultado: string;
+  nombre: string;
+  ruc: string;
+  accion: string;
+}
+
 const ELEMENT_DATA1: PeriodicElement1[] = [
   
 ];
 
+const ELEMENT_DATA2: PeriodicElement2[] = [
+  
+];
 @Component({
   selector: 'app-admin-admin-chat',
   templateUrl: './admin-admin-chat.component.html',
@@ -31,7 +45,11 @@ export class AdminAdminChatComponent implements OnInit {
   shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
   
   displayedColumns1: string[] = ['ticket', 'solicitud', 'fecha_solicitud', 'fecha_Respuesta', 'resultado', 'nombre', 'dni', 'accion'];
+  displayedColumns2: string[] = ['ticket', 'solicitud', 'fecha_solicitud', 'fecha_Respuesta', 'resultado', 'nombre', 'ruc', 'accion'];
+  
   dataSource1 = ELEMENT_DATA1;
+  dataSource2 = ELEMENT_DATA2;
+
   constructor(
     private _service: ServiceService,
     private _snackBar: MatSnackBar
@@ -53,6 +71,7 @@ export class AdminAdminChatComponent implements OnInit {
         this._snackBar.open('Solicitud Aceptada', null, {
           duration: 2000,
         });
+        this.obtenerNotificaciones()
       },
       error => {
         console.log('error', error)
@@ -75,6 +94,7 @@ export class AdminAdminChatComponent implements OnInit {
         this._snackBar.open('Solicitud Rechazada', null, {
           duration: 2000,
         });
+        this.obtenerNotificaciones()
       },
       error => {
         console.log('error', error)
@@ -108,7 +128,26 @@ export class AdminAdminChatComponent implements OnInit {
         });
 
         this.dataSource1 = naturalArray
-        console.log(this.dataSource1)
+
+        let juridicalArray = []
+        response.data.juridical.forEach(element => {
+          let n = {
+            ticket: element.ticket,
+            solicitud: element.ticket,
+            fecha_solicitud: element.fecha_solicitud,
+            fecha_Respuesta: element.fecha_respuesta,
+            resultado: element.resultado,
+            nombre: element.client.user.nombres,
+            ruc: "20182727342",
+            accion: 'string',
+            id: element._id
+          }
+
+          juridicalArray.push(n)
+        });
+
+        this.dataSource2 = juridicalArray
+        console.log(this.dataSource2)
       },
       error => {
         console.log('error', error)
@@ -118,4 +157,7 @@ export class AdminAdminChatComponent implements OnInit {
 
   }
 
+  cerrarSesion() {
+    
+  }
 }

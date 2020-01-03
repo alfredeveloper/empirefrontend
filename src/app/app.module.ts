@@ -28,6 +28,8 @@ import { AdminClientChatComponent } from './admin-client-chat/admin-client-chat.
 import { AdminClientHelpComponent } from './admin-client-help/admin-client-help.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AdminAdminChangePasswordComponent } from './admin-admin-change-password/admin-admin-change-password.component';
+import { AdminClientChangePasswordComponent, ChangePasswordFromLinktDialog } from './admin-client-change-password/admin-client-change-password.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,10 @@ import { HttpClientModule } from '@angular/common/http';
     AdminClientChatComponent,
     AdminClientHelpComponent,
     ForgotPasswordComponent,
-    ChangePasswordClientDialog
+    ChangePasswordClientDialog,
+    AdminAdminChangePasswordComponent,
+    AdminClientChangePasswordComponent,
+    ChangePasswordFromLinktDialog
   ],
   imports: [
     BrowserModule,
@@ -64,6 +69,6 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [ChangePasswordClientDialog]
+  entryComponents: [ChangePasswordClientDialog, ChangePasswordFromLinktDialog]
 })
 export class AppModule { }

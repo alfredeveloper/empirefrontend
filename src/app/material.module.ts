@@ -26,7 +26,8 @@ import {
     MatSnackBarModule,
     MatMenuModule,
     MatNativeDateModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatBadgeModule
 } from '@angular/material';
 
 @NgModule({
@@ -53,7 +54,7 @@ import {
    MatTableModule,
    MatNativeDateModule,
    MatDatepickerModule,
-   
+   MatBadgeModule
  ],
  exports:[
    MatProgressBarModule,
@@ -78,7 +79,8 @@ import {
    MatMenuModule,
    MatTableModule,
    MatNativeDateModule,
-   MatDatepickerModule
+   MatDatepickerModule,
+   MatBadgeModule
  ]
 })
 export class MaterialModule { }

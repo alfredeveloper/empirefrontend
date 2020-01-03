@@ -150,11 +150,15 @@ export class LoginComponent implements OnInit {
 
       this._service.login(body).subscribe(
         response => {
+          console.log('asdffadsf', response.clientId)
 
           if(response.status == true) {
-            if(response.data.contrasenia == undefined || response.data.contrasenia == null || response.data.contrasenia == '') {
 
-              localStorage.setItem('userId', response.data._id)
+            localStorage.setItem('clientId', response.clientId)
+            localStorage.setItem('userId', response.data._id)
+            localStorage.setItem('clientDirectId', response.clientDirectId)
+
+            if(response.data.contrasenia == undefined || response.data.contrasenia == null || response.data.contrasenia == '') {
 
               const dialogRef = this.dialog.open(ChangePasswordClientDialog, {
                 width: '300px',
@@ -224,7 +228,7 @@ export class LoginComponent implements OnInit {
       direccion: this.direccion,
       genero: this.genero,
       tipoDocumento: this.tipoDocumento,
-      numdoc: this.numdoc,
+      numDocumento: this.numdoc,
       fechaNacimiento: this.fechaNacimiento,
       correo: this.correoElectronico,
       telefono: this.telefono,

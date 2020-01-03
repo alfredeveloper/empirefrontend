@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
+import { ServiceService } from '../services/service.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -11,7 +12,8 @@ export class ForgotPasswordComponent implements OnInit {
   email: string;
 
   constructor(
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private _service: ServiceService
   ) { }
 
   ngOnInit() {
@@ -24,7 +26,24 @@ export class ForgotPasswordComponent implements OnInit {
         duration: 2000,
       });
     } else {
+      let data = {
+        correo: this.email
+      }
 
+      this._service.requestChangePassword(data).subscribe(
+        response => {
+          console.log(response)
+          this._snackBar.open('Solicitud de cambio enviada', null, {
+            duration: 4000,
+          });
+        },
+        error => {
+          console.log(error)
+          this._snackBar.open('Error en el servidor', null, {
+            duration: 4000,
+          });
+        }
+      )
     }
 
 

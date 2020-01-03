@@ -42,7 +42,7 @@ mat-sidenav-container {
     padding: 15px 0px 0px 15px;
 }
 
-mat-icon {
+.mat-drawer-icon {
     padding-right: 20px;
     
 }

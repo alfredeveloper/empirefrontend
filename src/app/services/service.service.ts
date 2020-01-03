@@ -33,6 +33,9 @@ export class ServiceService {
     return this.http.get<any>(`${environment.apiUrl}/api/clients`);
   }
 
+  getClient(id): Observable<any> {
+    return this.http.get(<any>(`${environment.apiUrl}/api/clients/${id}`))
+  }
   sendCode(data: Object): Observable<any> {
     return this.http.post<any>(`${environment.apiUrl}/api/send/code`, data);
   }
@@ -60,23 +63,38 @@ export class ServiceService {
   }
 
   updateMomentNatural(data): Observable<any> {
-    return this.http.post<any>(`${environment.apiUrl}/save/moment/natural`, data)
+    return this.http.post<any>(`${environment.apiUrl}/api/save/moment/natural`, data)
   }
 
   updateMomentJuridical(data): Observable<any> {
-    return this.http.post<any>(`${environment.apiUrl}/save/moment/juridical`, data)
+    return this.http.post<any>(`${environment.apiUrl}/api/save/moment/juridical`, data)
   }
 
   getDataNatural(id): Observable<any> {
-    return this.http.get<any>(`${environment.apiUrl}/get/data/natural/${id}`)
+    return this.http.get<any>(`${environment.apiUrl}/api/get/data/natural/${id}`)
   }
 
   getDataJuridical(id): Observable<any> {
-    return this.http.get<any>(`${environment.apiUrl}/get/data/juridical/${id}`)
+    return this.http.get<any>(`${environment.apiUrl}/api/get/data/juridical/${id}`)
   }
   
   changeStatusRequest(data: Object): Observable<any>{
     return this.http.put<any>(`${environment.apiUrl}/api/requests`, data)
+
+  }
+
+  changePasswordAdmin(data: Object): Observable<any>{
+    return this.http.put<any>(`${environment.apiUrl}/api/change/password/admin`, data)
+
+  }
+
+  changePasswordFromLink(data: Object): Observable<any>{
+    return this.http.put<any>(`${environment.apiUrl}/api/change/password/link`, data)
+
+  }
+  
+  requestChangePassword(data: Object): Observable<any>{
+    return this.http.post<any>(`${environment.apiUrl}/api/request/change/password`, data)
 
   }
 }

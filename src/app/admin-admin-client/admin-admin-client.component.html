@@ -14,27 +14,27 @@
         <div style="width: 300px;">
             <mat-list>
                 <mat-list-item [routerLink]="['/admin-administrador-dashboard']" (click)="sidenav.close()"> 
-                    <mat-icon aria-hidden="false" aria-label="Example home icon">dashboard</mat-icon>
+                    <mat-icon class="mat-drawer-icon" aria-hidden="false" aria-label="Example home icon">dashboard</mat-icon>
                     Dashboard
                 </mat-list-item>
                 <mat-list-item [routerLink]="['/admin-administrador']" (click)="sidenav.close()"> 
-                    <mat-icon aria-hidden="false" aria-label="Example home icon">supervisor_account</mat-icon>
+                    <mat-icon class="mat-drawer-icon" aria-hidden="false" aria-label="Example home icon">supervisor_account</mat-icon>
                     Administrar Usuarios 
                 </mat-list-item>
                 <mat-list-item [routerLink]="['/admin-administrador-cliente']"> 
-                    <mat-icon aria-hidden="false" aria-label="Example home icon">people</mat-icon>
+                    <mat-icon class="mat-drawer-icon" aria-hidden="false" aria-label="Example home icon">people</mat-icon>
                     Administrar Clientes
                  </mat-list-item>
                 <mat-list-item [routerLink]="['/admin-administrador-chat']"> 
-                    <mat-icon aria-hidden="false" aria-label="Example home icon">notifications</mat-icon>
+                    <mat-icon class="mat-drawer-icon" aria-hidden="false" aria-label="Example home icon">notifications</mat-icon>
                     Notificaciones 
                 </mat-list-item>
                 <mat-list-item [routerLink]="['/admin-administrador-ayuda']"> 
-                    <mat-icon aria-hidden="false" aria-label="Example home icon">help</mat-icon>
+                    <mat-icon class="mat-drawer-icon" aria-hidden="false" aria-label="Example home icon">help</mat-icon>
                     Ayuda 
                 </mat-list-item>
                 <mat-list-item [routerLink]="['/admin']"> 
-                    <mat-icon aria-hidden="false" aria-label="Example home icon">exit_to_app</mat-icon>
+                    <mat-icon class="mat-drawer-icon" aria-hidden="false" aria-label="Example home icon">exit_to_app</mat-icon>
                     Cerrar sesión 
                 </mat-list-item>
             </mat-list>
@@ -58,18 +58,22 @@
 
                     </button>
                     <mat-menu #menuAccount="matMenu">
-                        <button mat-menu-item>Notificacion de prueba</button>
-                        <button mat-menu-item>Item 2</button>
+                        <button mat-menu-item>Gustavo Paul</button>
+                        <button mat-menu-item (click)="cerrarSesion()">Cerrar Sesión</button>
                     </mat-menu>
                 </li>
                 <li class="item-navbar" style="float: right;">
                     <button mat-button [matMenuTriggerFor]="menu">
-                        <mat-icon aria-hidden="false" aria-label="Example home icon" style="color: white;">notifications</mat-icon>
+                        <mat-icon aria-hidden="false" aria-label="Example home icon"  matBadge="3" matBadgeColor="warn" style="color: white;">notifications</mat-icon>
                     </button>
                     <mat-menu #menu="matMenu">
-                        <button mat-menu-item>Item 1</button>
-                        <button mat-menu-item>Item 2</button>
+                        <button mat-menu-item> <mat-icon>keyboard_arrow_right</mat-icon> Nuevo Cliente</button>
+                        <button mat-menu-item> <mat-icon>keyboard_arrow_right</mat-icon> Solicitud Cambio de Contraseña</button>
+                        <button mat-menu-item> <mat-icon>keyboard_arrow_right</mat-icon> Solicitud Cambio de Datos</button>
                     </mat-menu>
+                </li>
+                <li class="item-navbar">
+                    
                 </li>
                 
             </ul>
@@ -85,6 +89,7 @@
                 <!-- <button mat-raised-button (click)="shuffle()"> Shuffle </button> -->
 
             </div>
+            
             <div>
                 <mat-tab-group>
                     <mat-tab label="Persona Natural">
@@ -125,11 +130,11 @@
                             <ng-container matColumnDef="Accion">
                                 <th mat-header-cell *matHeaderCellDef> Accion </th>
                                 <td mat-cell *matCellDef="let element" ngFor="let element of dataSource2">  
-                                    <button (click)="aceptar(element.id)" mat-mini-fab aria-label="Example icon-button with a heart icon" style="background-color: green; padding-right: 0px !important; width: 32px; height: 32px; border-radius: 4px;">
+                                    <button *ngIf="element.status == 'en evaluacion'" (click)="aceptar(element.id)" mat-mini-fab aria-label="Example icon-button with a heart icon" style="background-color: green; padding-right: 0px !important; width: 32px; height: 32px;">
                                         <mat-icon style="padding-right: 0px; font-size: 16px;">check</mat-icon>
                                     </button>
                                     &nbsp;
-                                    <button (click)="rechazar(element.id)" mat-mini-fab aria-label="Example icon-button with a heart icon"  style="background-color: red; padding-right: 0px !important; width: 32px; height: 32px; border-radius: 4px;">
+                                    <button *ngIf="element.status == 'en evaluacion'" (click)="rechazar(element.id)" mat-mini-fab aria-label="Example icon-button with a heart icon"  style="background-color: red; padding-right: 0px !important; width: 32px; height: 32px;">
                                         <mat-icon style="padding-right: 0px; font-size: 16px;">close</mat-icon>
                                     </button>
                                 </td>
@@ -147,23 +152,23 @@
                                                     <h3>Datos Personales</h3>
 
                                                     <p>{{element.Apellidos}} {{element.Nombres}}</p>
-                                                    <p>Lima - Lima - Lima</p>
-                                                    <p>Av. Alameda 2343</p>
-                                                    <p>Masculino</p>
+                                                    <p>{{element.departamento}} - {{element.provincia}} - {{element.distrito}}</p>
+                                                    <p>{{element.direccion}}</p>
+                                                    <p>{{element.genero}}</p>
                                                 </div>
                                                 <div style="width: 33%; float: left;">
                                                     <h3>Datos De Identificación</h3>
                                                     
-                                                    <p>DNI: 704568545</p>
-                                                    <p>01/12/2000</p>
+                                                    <p>DNI: {{element.DNI}}</p>
+                                                    <p>{{element.fechaNacimiento}}</p>
                                                     <p>{{element.Correo}}</p>
-                                                    <p>985454152</p>
+                                                    <p>{{element.telefono}}</p>
                                                 </div>
                                                 <div style="width: 33%; float: left;">
                                                     <h3>Datos Laborales</h3>
                                                     
-                                                    <p>Ingeniero de sistemas</p>
-                                                    <p>ECV</p>
+                                                    <p>{{element.ocupacion}}</p>
+                                                    <p>{{element.centroLaboral}}</p>
                                                     
                                                 </div>
                                                 
@@ -212,21 +217,21 @@
                             <ng-container matColumnDef="Estado">
                                 <th mat-header-cell *matHeaderCellDef> Estado </th>
                                 <td mat-cell *matCellDef="let element" ngFor="let element of dataSource1"> 
-                                    <span class="status-aceptado" *ngIf="element.status == 'aceptado'">{{element.Estado}}</span>
-                                    <span class="status-ingresado" *ngIf="element.status == 'ingresado'">{{element.Estado}}</span>
-                                    <span class="status-evaluacion" *ngIf="element.status == 'evaluacion'">{{element.Estado}}</span>
-                                    <span class="status-rechazado" *ngIf="element.status == 'rechazado'">{{element.Estado}}</span>
+                                    <span class="status-aceptado" *ngIf="element.status == 'aceptado'">Aceptado</span>
+                                    <span class="status-ingresado" *ngIf="element.status == 'ingresado'">Ingresado</span>
+                                    <span class="status-evaluacion" *ngIf="element.status == 'evaluacion'">En Evaluación</span>
+                                    <span class="status-rechazado" *ngIf="element.status == 'rechazado'">Rechazado</span>
                                 </td>
                             </ng-container>
 
                             <ng-container matColumnDef="Accion" >
                                 <th mat-header-cell *matHeaderCellDef> Accion </th>
                                 <td mat-cell *matCellDef="let element" ngFor="let element of dataSource1">  
-                                    <button (click)="aceptar(element.id)" mat-mini-fab aria-label="Example icon-button with a heart icon" style="background-color: green; padding-right: 0px !important; width: 32px; height: 32px; border-radius: 4px;">
+                                    <button *ngIf="element.status == 'en evaluacion'" (click)="aceptar(element.id)" mat-mini-fab aria-label="Example icon-button with a heart icon" style="background-color: green; padding-right: 0px !important; width: 32px; height: 32px;">
                                         <mat-icon style="padding-right: 0px; font-size: 16px;">check</mat-icon>
                                     </button>
                                     &nbsp;
-                                    <button (click)="rechazar(element.id)" mat-mini-fab aria-label="Example icon-button with a heart icon"  style="background-color: red; padding-right: 0px !important; width: 32px; height: 32px; border-radius: 4px;">
+                                    <button *ngIf="element.status == 'en evaluacion'" (click)="rechazar(element.id)" mat-mini-fab aria-label="Example icon-button with a heart icon"  style="background-color: red; padding-right: 0px !important; width: 32px; height: 32px;">
                                         <mat-icon style="padding-right: 0px; font-size: 16px;">close</mat-icon>
                                     </button>
                                 </td>
@@ -234,7 +239,7 @@
 
                             <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
                             <ng-container matColumnDef="expandedDetail">
-                                <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay1.length">
+                                <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay1.length" ngFor="let element of dataSource1">
 
                                     <div class="example-element-detail"
                                     [@detailExpand]="element == expandedElement1 ? 'expanded' : 'collapsed'"
@@ -244,32 +249,32 @@
                                             <div style="width: 25%; float: left;">
                                                 <h3>Datos Empresariales</h3>
 
-                                                <p>Vex Soluciones</p>
-                                                <p>Lima - Lima - Lima</p>
-                                                <p>Av. Alameda 2343</p>
-                                                <p>RUC: 20145415252</p>
+                                                <p>{{element.Nombre_Comercial}}</p>
+                                                <p>{{element.departamento}} - {{element.provincia}} - {{element.distrito}}</p>
+                                                <p>{{element.direccion}}</p>
+                                                <p>RUC: {{element.ruc}}</p>
                                             </div>
                                             <div style="width: 25%; float: left;">
                                                 <h3>Datos Personales</h3>
 
-                                                <p>Yupanqui Alarcon Alfredo</p>
-                                                <p>Lima - Lima - Lima</p>
-                                                <p>Av. Alameda 2343</p>
-                                                <p>Masculino</p>
+                                                <p>{{element.nombresRepresentante}} {{element.ApellidosRepresentante}}</p>
+                                                <p>{{element.departamento}} - {{element.provincia}} - {{element.distrito}}</p>
+                                                <p>{{element.direccionRepresentante}}</p>
+                                                <p>{{element.generoRepresentante}}</p>
                                             </div>
                                             <div style="width: 25%; float: left;">
                                                 <h3>Datos De Identificación</h3>
                                                 
-                                                <p>DNI: 704568545</p>
-                                                <p>01/12/2000</p>
-                                                <p>alfredeveloper@gmail</p>
-                                                <p>985454152</p>
+                                                <p>DNI: {{element.numdocRepresentante}}</p>
+                                                <p>{{element.fechaNacimientoRepresentante}}</p>
+                                                <p>{{element.correoRepresentante}}</p>
+                                                <p>{{element.telefonoRepresentante}}</p>
                                             </div>
                                             <div style="width: 25%; float: left;">
                                                 <h3>Datos Laborales</h3>
                                                 
-                                                <p>Ingeniero de sistemas</p>
-                                                <p>ECV</p>
+                                                <p>{{element.ocupacionRepresentante}}</p>
+                                                <p>{{element.centroLaboralRepresentante}}</p>
                                                 
                                             </div>
                                             
@@ -309,7 +314,7 @@
     </button>
 
     <mat-tab-group>
-        <mat-tab label="Eres una persona natural">
+        <mat-tab label="Persona Natural">
             
             <div class="natural-section">
                 <h2>Datos Personales</h2>
@@ -342,6 +347,12 @@
                     </mat-form-field>
                 </div>
                
+                <div class="sm-4 left">
+                    <mat-form-field>
+                        <input matInput placeholder="DNI" [(ngModel)]="dni" name="dni">
+                    </mat-form-field>
+
+                </div>
             </div>
 
             
@@ -352,7 +363,7 @@
             </div>
 
         </mat-tab>
-        <mat-tab label="Eres una persona jurídica"> 
+        <mat-tab label="Persona Jurídica"> 
             
             <div class="natural-section">
                 <h2>Datos Empresariales</h2>

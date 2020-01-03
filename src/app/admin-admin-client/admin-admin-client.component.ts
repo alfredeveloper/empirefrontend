@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { ServiceService } from '../services/service.service';
 import { trigger, state, transition, style, animate } from '@angular/animations';
+import { Router } from '@angular/router';
 
 export interface PeriodicElement1 {
   Razon_Social: string;
@@ -74,6 +75,7 @@ export class AdminAdminClientComponent implements OnInit {
   apellidoMaterno: string;
   nombres: string;
   correoElectronicoPersona: string;
+  dni: string;
 
   razonSocial: string;
   nombreComercial: string;
@@ -90,7 +92,8 @@ export class AdminAdminClientComponent implements OnInit {
   
   constructor(
     private _snackBar: MatSnackBar,
-    private _service: ServiceService
+    private _service: ServiceService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -115,6 +118,7 @@ export class AdminAdminClientComponent implements OnInit {
         apellidoMaterno: this.apellidoMaterno,
         nombres: this.nombres,
         correo: this.correoElectronicoPersona,
+        numDocumento: this.dni,
         tipoCliente: "natural"
       }
 
@@ -182,7 +186,16 @@ export class AdminAdminClientComponent implements OnInit {
             Estado: element.client.user.status,
             Accion: `Accion`,
             id: element.client.user._id,
-            status: element.client.user.status
+            status: element.client.user.status,
+            departamento: element.client.user.departamento,
+            provincia: element.client.user.provincia,
+            distrito: element.client.user.distrito,
+            direccion: element.client.user.direccion,
+            genero: element.client.user.genero,
+            fechaNacimiento: element.client.user.fechaNacimiento,
+            telefono: element.client.user.telefono,
+            centroLaboral: element.client.user.centroLaboral,
+            ocupacion: element.client.user.ocupacion,
 
           }
 
@@ -200,7 +213,23 @@ export class AdminAdminClientComponent implements OnInit {
             Estado: element.client.user.status,
             Accion: 'Accion',
             id: element.client.user._id,
-            status: element.client.user.status
+            status: element.client.user.status,
+            departamento: element.departamento,
+            provincia: element.provincia,
+            distrito: element.distrito,
+            direccion: element.direccion,
+            nombresRepresentante: element.client.user.nombres,
+            ApellidosRepresentante: element.client.user.apellidoPaterno + ' ' + element.client.user.apellidoMaterno,
+            direccionRepresentante: element.client.user.direccion,
+            departamentoRepresentante: element.client.user.departamento,
+            distritoRepresentante: element.client.user.distrito,
+            telefonoRepresentante: element.client.user.telefono,
+            generoRepresentante: element.client.user.genero,
+            numdocRepresentante: element.client.user.numDocumento,
+            fechaNacimientoRepresentante: element.client.user.fechaNacimiento,
+            correoRepresentante: element.client.user.correo,
+            ocupacionRepresentante: element.client.user.ocupacion,
+            centroLaboralRepresentante: element.client.user.centroLaboral,
           }
 
           juridicalArray.push(j)
@@ -264,4 +293,9 @@ export class AdminAdminClientComponent implements OnInit {
     )
     
   }
+
+  cerrarSesion() {
+    this.router.navigate(["/admin"])
+  }
+  
 }

@@ -16,6 +16,8 @@ import { AdminClientConfigurationComponent } from './admin-client-configuration/
 import { AdminClientHelpComponent } from './admin-client-help/admin-client-help.component';
 import { AdminAdminDashboardComponent } from './admin-admin-dashboard/admin-admin-dashboard.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { AdminAdminChangePasswordComponent } from './admin-admin-change-password/admin-admin-change-password.component';
+import { AdminClientChangePasswordComponent } from './admin-client-change-password/admin-client-change-password.component';
 
 
 const AppRoutes: Routes = [
@@ -29,6 +31,8 @@ const AppRoutes: Routes = [
   { path: 'admin-cliente-configuration', component: AdminClientConfigurationComponent },
   { path: 'admin-cliente-chat', component: AdminClientChatComponent },
   { path: 'admin-cliente-help', component: AdminClientHelpComponent },
+  { path: 'admin-cliente-cambio-contraseña', component: AdminAdminChangePasswordComponent },
+  { path: 'cambio-de-contraseña', component: AdminClientChangePasswordComponent },
   { path: 'admin-administrador-dashboard', component: AdminAdminDashboardComponent },
   { path: 'admin-administrador', component: AdminAdminComponent },
   { path: 'admin-administrador-cliente', component: AdminAdminClientComponent },
