@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ServiceService } from '../services/service.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog } from '@angular/material';
+import { ConfirmationDialogComponent } from '../shared/confirmation-dialog/confirmation-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-admin-change-password',
@@ -20,13 +22,46 @@ export class AdminAdminChangePasswordComponent implements OnInit {
   currentPassword: string;
   newPassword: string;
   newPasswordConfirm: string;
+  countNotifications: string;
 
   constructor(
+    public dialog: MatDialog,
     private _service: ServiceService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private router: Router
   ) { }
 
   ngOnInit() {
+  }
+
+  getNotifications() {
+
+    this._service.getNotifications().subscribe(
+      response => {
+        if(response == true) {
+
+          this.countNotifications = response.data.natural.length + response.data.juridical.length;
+        
+        }
+      },
+      error => {
+        console.log('Error ', error)
+      }
+    )
+
+  }
+
+  openDialog(message): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '300px',
+      data: message
+    })
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        console.log('Si')
+      }
+    })
   }
 
   cambiarContrasenia() {
@@ -35,9 +70,7 @@ export class AdminAdminChangePasswordComponent implements OnInit {
     this.newPassword == "" || this.newPassword == undefined || this.newPassword == null ||
     this.currentPassword == "" || this.currentPassword == undefined || this.currentPassword == null) {
 
-      this._snackBar.open('Digitar las contraseñas respectivas', null, {
-        duration: 3000,
-      });
+      this.openDialog("Digitar las contraseñas respectivas");
 
     }else {
       if(this.newPassword == this.newPasswordConfirm) {
@@ -50,28 +83,27 @@ export class AdminAdminChangePasswordComponent implements OnInit {
         this._service.changePasswordAdmin(data).subscribe(
           response => {
             if(response.status == true) {
-              this._snackBar.open('Cambio de contraseña exitosa', null, {
-                duration: 3000,
-              });
+              
+              this.openDialog("Cambio de contraseña exitosa");
+
             } else {
-              this._snackBar.open('Error en la contraseña actual', null, {
-                duration: 3000,
-              });
+              
+              this.openDialog("Error en la contraseña actual");
+
             }
             console.log('response', response)
           },
           error => {
             console.log('error', error)
-            this._snackBar.open('Error en la contraseña actual', null, {
-              duration: 3000,
-            });
+            
+            this.openDialog("Error en la contraseña actual");
+
           }
         )
   
       } else {
-        this._snackBar.open('Confirmar la contraseña correctamente', null, {
-          duration: 3000,
-        });
+        
+        this.openDialog("Confirmar la contraseña correctamente");
       }
     }
 
@@ -81,6 +113,18 @@ export class AdminAdminChangePasswordComponent implements OnInit {
     this.currentPassword = "";
     this.newPassword = "";
     this.newPasswordConfirm = "";
+  }
+
+  irANuevoCliente() {
+
+    this.router.navigate(['/admin-administrador-cliente'])
+
+  }
+
+  irANuevoCambioDeDatos() {
+
+    this.router.navigate(['/admin-administrador-chat'])
+
   }
 
 }

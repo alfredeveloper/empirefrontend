@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ServiceService } from '../services/service.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog } from '@angular/material';
+import { ConfirmationDialogComponent } from '../shared/confirmation-dialog/confirmation-dialog.component';
+import { Router } from '@angular/router';
 
 export interface PeriodicElement1 {
   ticket: string;
@@ -49,14 +51,48 @@ export class AdminAdminChatComponent implements OnInit {
   
   dataSource1 = ELEMENT_DATA1;
   dataSource2 = ELEMENT_DATA2;
+  countNotifications: string;
 
   constructor(
+    public dialog: MatDialog,
     private _service: ServiceService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private router: Router
   ) { }
 
   ngOnInit() {
     this.obtenerNotificaciones()
+    this.getNotifications()
+  }
+
+  getNotifications() {
+
+    this._service.getNotifications().subscribe(
+      response => {
+        if(response.status == true) {
+
+          this.countNotifications = response.data.natural.length + response.data.juridical.length;
+          console.log(this.countNotifications)
+        }
+      },
+      error => {
+        console.log('Error ', error)
+      }
+    )
+
+  }
+
+  openDialog(message): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '300px',
+      data: message
+    })
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        console.log('Si')
+      }
+    })
   }
 
   aprobar(id) {
@@ -68,17 +104,15 @@ export class AdminAdminChatComponent implements OnInit {
     this._service.changeStatusRequest(data).subscribe(
       response => {
         console.log('response', response)
-        this._snackBar.open('Solicitud Aceptada', null, {
-          duration: 2000,
-        });
+        
+        this.openDialog("Solicitud Aceptada");
+
         this.obtenerNotificaciones()
       },
       error => {
         console.log('error', error)
-        this._snackBar.open('Error en el servidor', null, {
-          duration: 2000,
-        });
-
+        
+        this.openDialog("Error en el servidor");
       }
     )
   }
@@ -91,16 +125,14 @@ export class AdminAdminChatComponent implements OnInit {
     this._service.changeStatusRequest(data).subscribe(
       response => {
         console.log('response', response)
-        this._snackBar.open('Solicitud Rechazada', null, {
-          duration: 2000,
-        });
+        
+        this.openDialog("Solicitud Rechazada");
         this.obtenerNotificaciones()
       },
       error => {
         console.log('error', error)
-        this._snackBar.open('Error en el servidor', null, {
-          duration: 2000,
-        });
+       
+        this.openDialog("Error en el servidor");
       }
     )
   }
@@ -158,6 +190,18 @@ export class AdminAdminChatComponent implements OnInit {
   }
 
   cerrarSesion() {
-    
+
+  }
+
+  irANuevoCliente() {
+
+    this.router.navigate(['/admin-administrador-cliente'])
+
+  }
+
+  irANuevoCambioDeDatos() {
+
+    this.router.navigate(['/admin-administrador-chat'])
+
   }
 }

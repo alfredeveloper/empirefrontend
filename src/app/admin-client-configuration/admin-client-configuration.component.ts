@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ServiceService } from '../services/service.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog } from '@angular/material';
+import { ConfirmationDialogComponent } from '../shared/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-admin-client-configuration',
@@ -31,7 +32,8 @@ export class AdminClientConfigurationComponent implements OnInit {
   telefono: string;
   profesion: string;
   centroLaboral: string;
-
+  archivos: string;
+  
   // juridical
   razonSocial: string;
   ruc: string;
@@ -61,6 +63,7 @@ export class AdminClientConfigurationComponent implements OnInit {
   isDisabled = true;
 
   constructor(
+    public dialog: MatDialog,
     private _service: ServiceService,
     private _snackBar: MatSnackBar
   ) { }
@@ -69,6 +72,19 @@ export class AdminClientConfigurationComponent implements OnInit {
 
     this.esPersonaNatural()
 
+  }
+
+  openDialog(message): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '300px',
+      data: message
+    })
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        console.log('Si')
+      }
+    })
   }
 
   editar() {
@@ -100,9 +116,9 @@ export class AdminClientConfigurationComponent implements OnInit {
   }
 
   enviarSolicitud() {
-    this._snackBar.open('Se envio la solicitud de actualización de cuenta', null, {
-      duration: 2000,
-    });
+    
+    this.openDialog("Se envió la solicitud de actualización de cuenta");
+
   }
 
   obtenerDatosNatural() {
@@ -127,9 +143,9 @@ export class AdminClientConfigurationComponent implements OnInit {
       },
       error => {
         console.log('error', error)
-        this._snackBar.open('Error en el servidor', null, {
-          duration: 2000,
-        });
+        
+        this.openDialog("Error en el servidor");
+
       }
     )
 
@@ -167,9 +183,9 @@ export class AdminClientConfigurationComponent implements OnInit {
       error => {
         console.log('error', error)
 
-        this._snackBar.open('Error en el servidor', null, {
-          duration: 2000,
-        });
+        
+        this.openDialog("Error en el servidor");
+
       }
     )
   }
@@ -207,22 +223,22 @@ export class AdminClientConfigurationComponent implements OnInit {
     this._service.updateMomentJuridical(data).subscribe(
       response => {
         if(response.status == true) {
-          this._snackBar.open('Solicitud enviada', null, {
-            duration: 3000,
-          });
+          
+          this.openDialog("Solicitud enviada");
+
           console.log('response', response)
           this.isDisabled = true;
         }else {
-          this._snackBar.open('Error al enviar solicitud', null, {
-            duration: 3000,
-          });
+          
+          this.openDialog("Error al enviar solicitud");
+
         }
       },
       error => {
         console.log('error', error)
-        this._snackBar.open('Error en el servidor', null, {
-          duration: 2000,
-        });
+        
+        this.openDialog("Error en el servidor");
+
       }
     )
   }
@@ -249,24 +265,24 @@ export class AdminClientConfigurationComponent implements OnInit {
     this._service.updateMomentNatural(data).subscribe(
       response => {
         if(response.status == true) {
-          this._snackBar.open('Solicitud enviada', null, {
-            duration: 3000,
-          });
+          
+          this.openDialog("Solicitud enviada");
+
           console.log('response', response)
           this.isDisabled = true;
 
         } else {
-          this._snackBar.open('Error al enviar solicitud', null, {
-            duration: 3000,
-          });
+          
+          this.openDialog("Error al enviar solicitud");
+
         }
 
       },
       error => {
         console.log('error', error)
-        this._snackBar.open('Error en el servidor', null, {
-          duration: 2000,
-        });
+        
+        this.openDialog("Error en el servidor");
+
       }
     )
 

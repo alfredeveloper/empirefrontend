@@ -5,6 +5,7 @@ import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { ServiceService } from '../services/service.service';
+import { ConfirmationDialogComponent } from '../shared/confirmation-dialog/confirmation-dialog.component';
 
 export interface DialogData {
   passwordChange: string;
@@ -95,9 +96,9 @@ export class LoginComponent implements OnInit {
 
     if( this.codigo == ""  || this.codigo == undefined || this.codigo == null ) {
       
-      this._snackBar.open('Ingrese su codigo de verificacion', null, {
-        duration: 2000,
-      });
+     
+
+      this.openDialog('Ingrese su código de verificación')
 
     } else {
       
@@ -113,16 +114,14 @@ export class LoginComponent implements OnInit {
             sidenav.toggle()
 
           } else {
-            this._snackBar.open('Código no existente', null, {
-              duration: 2000,
-            });
+            
+            this.openDialog('Código no existente')
           }
         },
         error => {
           console.log('error', error)
-          this._snackBar.open('Código no existente', null, {
-            duration: 2000,
-          });
+
+          this.openDialog('Código no existente')
         }
       )
 
@@ -137,9 +136,8 @@ export class LoginComponent implements OnInit {
       (this.email == undefined || this.password == undefined)
     ) {
 
-      this._snackBar.open('Ingrese su Correo electrónico y Contraseña', null, {
-        duration: 2000,
-      });
+      this.openDialog('Ingrese su Correo electrónico y Contraseña')
+      
 
     }else {
 
@@ -185,34 +183,44 @@ export class LoginComponent implements OnInit {
                   )
 
                 }else {
-                  this._snackBar.open('Las nuevas contraseñas deben coincidir', null, {
-                    duration: 2000,
-                  });
+                  
+                  this.openDialog('Las nuevas contraseñas deben coincidir')
                 }
               });
 
             } else {
+              this.openDialog('Inicio de sesion exitoso')
               this._router.navigate(['/admin-cliente'])
   
             }
 
           } else {
-            this._snackBar.open('Credenciales Incorrectas', null, {
-              duration: 2000,
-            });
+            this.openDialog('Credenciales Incorrectas')
           }
           console.log('response', response)
         },
         error => {
           console.log('error', error)
-          this._snackBar.open('Credenciales Incorrectas', null, {
-            duration: 2000,
-          });
+          
+          this.openDialog('Credenciales Incorrectas')
         }
       )
       
     }
   
+  }
+
+  openDialog(message): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '300px',
+      data: message
+    })
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        console.log('Si')
+      }
+    })
   }
 
   actualizarDatosPersonales(sidenav) {

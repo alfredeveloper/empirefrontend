@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog } from '@angular/material';
 import { ServiceService } from '../services/service.service';
 import { trigger, state, transition, style, animate } from '@angular/animations';
 import { Router } from '@angular/router';
+import { ConfirmationDialogComponent } from '../shared/confirmation-dialog/confirmation-dialog.component';
 
 export interface PeriodicElement1 {
   Razon_Social: string;
@@ -91,6 +92,7 @@ export class AdminAdminClientComponent implements OnInit {
   name: string;
   
   constructor(
+    public dialog: MatDialog,
     private _snackBar: MatSnackBar,
     private _service: ServiceService,
     private router: Router
@@ -98,6 +100,19 @@ export class AdminAdminClientComponent implements OnInit {
 
   ngOnInit() {
     this.obtenerClientes()
+  }
+
+  openDialog(message): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '300px',
+      data: message
+    })
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        console.log('Si')
+      }
+    })
   }
 
   registrarNatural(sidenavAddClient) {
@@ -108,9 +123,7 @@ export class AdminAdminClientComponent implements OnInit {
     this.correoElectronicoPersona == "" || this.correoElectronicoPersona == null || this.correoElectronicoPersona == undefined
     ) {
 
-      this._snackBar.open('Ingrese todos los campos', null, {
-        duration: 2000,
-      });
+      this.openDialog("Ingrese todos los campos");
 
     } else {
       let body = {
@@ -144,9 +157,8 @@ export class AdminAdminClientComponent implements OnInit {
     this.correoElectronicoEmpresa == "" || this.correoElectronicoEmpresa == null || this.correoElectronicoEmpresa == undefined
     ) {
 
-      this._snackBar.open('Ingrese todos los campos', null, {
-        duration: 2000,
-      });
+      
+      this.openDialog("Ingrese todos los campos");
 
     } else {
       let body = {
@@ -256,15 +268,13 @@ export class AdminAdminClientComponent implements OnInit {
     }
     this._service.changeStatus(data).subscribe(
       response => {
-        this._snackBar.open('Cliente Aceptado', null, {
-          duration: 2000,
-        });
+        
+        this.openDialog("Cliente Aceptado");
         this.obtenerClientes()
       },
       error=> {
-        this._snackBar.open('Error en el servidor', null, {
-          duration: 2000,
-        });
+        
+        this.openDialog("Error en el servidor");
 
       }
     )
@@ -279,15 +289,13 @@ export class AdminAdminClientComponent implements OnInit {
     }
     this._service.changeStatus(data).subscribe(
       response => {
-        this._snackBar.open('Cliente Rechazado', null, {
-          duration: 2000,
-        });
+        
+        this.openDialog("Cliente Rechazado");
 
       },
       error=> {
-        this._snackBar.open('Error en el servidor', null, {
-          duration: 2000,
-        });
+        
+        this.openDialog("Error en el servidor");
 
       }
     )
@@ -296,6 +304,18 @@ export class AdminAdminClientComponent implements OnInit {
 
   cerrarSesion() {
     this.router.navigate(["/admin"])
+  }
+
+  irANuevoCliente() {
+
+    this.router.navigate(['/admin-administrador-cliente'])
+
+  }
+
+  irANuevoCambioDeDatos() {
+
+    this.router.navigate(['/admin-administrador-chat'])
+
   }
   
 }

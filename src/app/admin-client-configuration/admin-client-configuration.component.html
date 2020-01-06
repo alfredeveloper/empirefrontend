@@ -69,6 +69,7 @@
             <div style="background-color: white; padding: 20px;" *ngIf="isNatural">
 
                 <h3>Persona Natural</h3>
+
                 <div class="natural-section">
                     <div class="sm-3 left">
                         <mat-form-field>
@@ -187,13 +188,18 @@
                     </div>
 
                     
-
                     <div class="sm-3 left">
                         <mat-form-field>
                             <input matInput placeholder="Centro de Labores" [(ngModel)]="centroLaboral" name="centroLaboral" [disabled]="isDisabled">
                         </mat-form-field>
                         
                     </div>
+
+                    <div class="sm-3 left">
+                        <input placeholder="Archivos" [(ngModel)]="archivos" name="archivos" [disabled]="isDisabled" type="file" accept=".png, .jpg, .jpeg">
+                        
+                    </div>
+
                 </div>
 
                 <div class="natural-section" style="padding: 10px;">

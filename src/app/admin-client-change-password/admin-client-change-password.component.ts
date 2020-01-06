@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatSnackBar } from '@angular/material';
 import { ServiceService } from '../services/service.service';
 import { Router } from '@angular/router';
+import { ConfirmationDialogComponent } from '../shared/confirmation-dialog/confirmation-dialog.component';
 
 export interface DialogData {
   passwordChange: string;
@@ -34,6 +35,19 @@ export class AdminClientChangePasswordComponent implements OnInit {
     this.abrirModalDeActualizacion();
   }
 
+  openDialog(message): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '300px',
+      data: message
+    })
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        console.log('Si')
+      }
+    })
+  }
+
   abrirModalDeActualizacion() {
     const dialogRef = this.dialog.open(ChangePasswordFromLinktDialog, {
       width: '300px',
@@ -56,9 +70,9 @@ export class AdminClientChangePasswordComponent implements OnInit {
 
               this._router.navigate(['/iniciar-sesion'])
             }else {
-              this._snackBar.open('Error al actualizar', null, {
-                duration: 2000,
-              });
+              
+              this.openDialog("Error al actualizar");
+
             }
 
           },
@@ -68,9 +82,9 @@ export class AdminClientChangePasswordComponent implements OnInit {
         )
 
       }else {
-        this._snackBar.open('Las nuevas contraseñas deben coincidir', null, {
-          duration: 2000,
-        });
+        
+        this.openDialog("Las nuevas contraseñas deben coincidir");
+
       }
     });
   }

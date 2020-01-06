@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
+import { ConfirmationDialogComponent } from '../shared/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-admin-login',
@@ -14,6 +15,7 @@ export class AdminLoginComponent implements OnInit {
   hide = true;
 
   constructor(
+    public dialog: MatDialog,
     private _snackBar: MatSnackBar,
     private _router: Router
 
@@ -22,6 +24,19 @@ export class AdminLoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  openDialog(message): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '300px',
+      data: message
+    })
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        console.log('Si')
+      }
+    })
+  }
+  
   acceder() {
 
     if(
@@ -30,9 +45,9 @@ export class AdminLoginComponent implements OnInit {
         (this.email == undefined || this.password == undefined)
       ) {
 
-        this._snackBar.open('Ingrese su Correo electrónico y Contraseña', null, {
-          duration: 2000,
-        });
+        
+        this.openDialog("Ingrese su Correo electrónico y Contraseña");
+
 
     } else {
       if( this.email == "admin@admin.com" && this.password == "Admin1." ) {
@@ -40,9 +55,9 @@ export class AdminLoginComponent implements OnInit {
         this._router.navigate(['/admin-administrador-cliente'])
 
       } else {
-        this._snackBar.open('Credenciales no Válidas', null, {
-          duration: 2000,
-        });
+        
+        this.openDialog("Credenciales no Válidas");
+
       }
     }
 

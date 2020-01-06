@@ -30,6 +30,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { HttpClientModule } from '@angular/common/http';
 import { AdminAdminChangePasswordComponent } from './admin-admin-change-password/admin-admin-change-password.component';
 import { AdminClientChangePasswordComponent, ChangePasswordFromLinktDialog } from './admin-client-change-password/admin-client-change-password.component';
+import { ConfirmationDialogComponent } from './shared/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { AdminClientChangePasswordComponent, ChangePasswordFromLinktDialog } fro
     ChangePasswordClientDialog,
     AdminAdminChangePasswordComponent,
     AdminClientChangePasswordComponent,
-    ChangePasswordFromLinktDialog
+    ChangePasswordFromLinktDialog,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -69,6 +71,10 @@ import { AdminClientChangePasswordComponent, ChangePasswordFromLinktDialog } fro
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [ChangePasswordClientDialog, ChangePasswordFromLinktDialog]
+  entryComponents: [
+    ChangePasswordClientDialog, 
+    ChangePasswordFromLinktDialog,
+    ConfirmationDialogComponent
+  ]
 })
 export class AppModule { }

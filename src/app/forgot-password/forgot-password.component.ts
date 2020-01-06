@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog } from '@angular/material';
 import { ServiceService } from '../services/service.service';
+import { ConfirmationDialogComponent } from '../shared/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-forgot-password',
@@ -12,6 +13,7 @@ export class ForgotPasswordComponent implements OnInit {
   email: string;
 
   constructor(
+    public dialog: MatDialog,
     private _snackBar: MatSnackBar,
     private _service: ServiceService
   ) { }
@@ -19,12 +21,25 @@ export class ForgotPasswordComponent implements OnInit {
   ngOnInit() {
   }
 
+  openDialog(message): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '300px',
+      data: message
+    })
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        console.log('Si')
+      }
+    })
+  }
+  
   enviar() {
     
     if(this.email == "" || this.email == null || this.email == undefined ) {
-      this._snackBar.open('Ingrese su Correo electrónico y Contraseña', null, {
-        duration: 2000,
-      });
+      
+      this.openDialog("Ingrese su Correo electrónico y Contraseña");
+
     } else {
       let data = {
         correo: this.email
@@ -33,15 +48,15 @@ export class ForgotPasswordComponent implements OnInit {
       this._service.requestChangePassword(data).subscribe(
         response => {
           console.log(response)
-          this._snackBar.open('Solicitud de cambio enviada', null, {
-            duration: 4000,
-          });
+          
+          this.openDialog("Solicitud de cambio enviada");
+
         },
         error => {
           console.log(error)
-          this._snackBar.open('Error en el servidor', null, {
-            duration: 4000,
-          });
+          
+          this.openDialog("Error en el servidor");
+
         }
       )
     }

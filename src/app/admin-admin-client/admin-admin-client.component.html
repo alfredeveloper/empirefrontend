@@ -67,8 +67,8 @@
                         <mat-icon aria-hidden="false" aria-label="Example home icon"  matBadge="3" matBadgeColor="warn" style="color: white;">notifications</mat-icon>
                     </button>
                     <mat-menu #menu="matMenu">
-                        <button mat-menu-item> <mat-icon>keyboard_arrow_right</mat-icon> Nuevo Cliente</button>
-                        <button mat-menu-item> <mat-icon>keyboard_arrow_right</mat-icon> Solicitud Cambio de Contraseña</button>
+                        <button mat-menu-item (click)="irANuevoCliente()"> <mat-icon>keyboard_arrow_right</mat-icon> Nuevo Cliente</button>
+                        <button mat-menu-item (click)="irANuevoCambioDeDatos()"> <mat-icon>keyboard_arrow_right</mat-icon> Solicitud Cambio de Contraseña</button>
                         <button mat-menu-item> <mat-icon>keyboard_arrow_right</mat-icon> Solicitud Cambio de Datos</button>
                     </mat-menu>
                 </li>
