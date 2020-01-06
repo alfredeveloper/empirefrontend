@@ -32,4 +32,8 @@ export class AdminAdminDashboardComponent implements OnInit {
 
   }
 
+  cerrarSesion() {
+    
+  }
+
 }

@@ -76,4 +76,8 @@ export class AdminAdminComponent implements OnInit {
   ngOnInit() {
   }
 
+  cerrarSesion() {
+    
+  }
+
 }

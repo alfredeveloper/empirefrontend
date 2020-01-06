@@ -127,4 +127,8 @@ export class AdminAdminChangePasswordComponent implements OnInit {
 
   }
 
+  cerrarSesion() {
+    
+  }
+
 }
