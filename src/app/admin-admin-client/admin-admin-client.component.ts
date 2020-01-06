@@ -140,6 +140,7 @@ export class AdminAdminClientComponent implements OnInit {
           console.log('response', response)
           alert('Tu código de verificacion es: ' + response.data.client.code)
           sidenavAddClient.close()
+          this.obtenerClientes()
         },
         error => {
           console.log('error', error)
@@ -175,6 +176,7 @@ export class AdminAdminClientComponent implements OnInit {
           console.log('response', response)
           alert('Tu código de verificacion es: ' + response.data.client.code)
           sidenavAddClient.close()
+          this.obtenerClientes()
         },
         error => {
           console.log('error', error)

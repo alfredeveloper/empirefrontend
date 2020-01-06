@@ -8,7 +8,7 @@
         </button>
 
         <mat-tab-group>
-            <mat-tab label="Eres una persona natural">
+            <mat-tab label="Persona Natural" *ngIf="isNatural">
                 
                 <div class="natural-section">
                     <h2 style="text-align: left;">Datos Personales</h2>
@@ -107,7 +107,7 @@
 
                     <div class="sm-4 left">
                         <mat-form-field>
-                            <input matInput placeholder="Correo Electrónico" [(ngModel)]="correoElectronico" name="correoElectronico">
+                            <input matInput placeholder="Correo Electrónico" [(ngModel)]="correoElectronico" name="correoElectronico" disabled>
                         </mat-form-field>
 
                     </div>
@@ -144,7 +144,7 @@
                 </div>
 
             </mat-tab>
-            <mat-tab label="Eres una persona jurídica"> 
+            <mat-tab label="Persona Jurídica" *ngIf="!isNatural"> 
                     
                 <div class="natural-section">
 
@@ -326,7 +326,7 @@
                 <div class="natural-section">
                     <div class="sm-4 left">
                         <mat-form-field>
-                            <input matInput placeholder="Correo Electrónico" [(ngModel)]="correoElectronicoJuridico" name="correoElectronicoJuridico">
+                            <input matInput placeholder="Correo Electrónico" [(ngModel)]="correoElectronicoJuridico" name="correoElectronicoJuridico" disabled>
                         </mat-form-field>
                     </div>
                     <div class="sm-4 left">

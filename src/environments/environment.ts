@@ -5,10 +5,10 @@
 export const environment = {
 
   production: false,
-  // apiUrl: 'http://localhost:3001'
+  apiUrl: 'http://localhost:3001'
   // apiUrl: 'https://empirebackend.herokuapp.com'  
   // apiUrl: 'http://taxiback.herokuapp.com'  
-  apiUrl: 'http://149.56.13.165/backend'  
+  // apiUrl: 'http://149.56.13.165/backend'  
   
 };
 

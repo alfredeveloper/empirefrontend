@@ -76,6 +76,8 @@ export class LoginComponent implements OnInit {
   ocupacionJuridico: string;
   centroLaboralJuridico: string;
   
+  isNatural = true;
+
   constructor(
     public dialog: MatDialog,
     private _snackBar: MatSnackBar,
@@ -95,8 +97,6 @@ export class LoginComponent implements OnInit {
   ingresarCodigo(sidenav) {
 
     if( this.codigo == ""  || this.codigo == undefined || this.codigo == null ) {
-      
-     
 
       this.openDialog('Ingrese su código de verificación')
 
@@ -112,7 +112,17 @@ export class LoginComponent implements OnInit {
           if(response.status == true) {
             localStorage.setItem('clientId', response.data._id)
             sidenav.toggle()
-
+            if (response.data.typeClient == 'natural') {
+              this.isNatural = true
+              this.nombres = response.data.user.nombres
+              this.apellidoPaterno = response.data.user.apellidoPaterno
+              this.apellidoPaterno = response.data.user.apellidoMaterno
+              this.correoElectronico = response.data.user.correo
+            }else {
+              this.isNatural = false
+              
+              this.correoElectronicoJuridico = response.data.user.correo
+            }
           } else {
             
             this.openDialog('Código no existente')
