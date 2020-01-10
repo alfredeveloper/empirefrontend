@@ -3,7 +3,7 @@
 <mat-sidenav-container>
     <mat-sidenav #sidenav [mode]="mode.value" position="end" style="width: 650px;" disableClose>
 
-        <button style="border-radius: 4px;" class="button-modal" mat-fab aria-label="Cerrar Modal" (click)="sidenav.close()" mat-disable-backdrop>
+        <button class="button-modal" mat-fab aria-label="Cerrar Modal" (click)="sidenav.close()" mat-disable-backdrop>
             <mat-icon>close</mat-icon>
         </button>
 
@@ -377,7 +377,7 @@
             <div class="content">
         
                 <div class="container" id="container">
-                    
+
                     <div class="overlay-container">
                         <div class="overlay">
                             <div class="overlay-panel overlay-right">
@@ -415,6 +415,7 @@
                     </div>
             
                     <div class="form-container sign-in-container">
+                        <mat-progress-bar mode="indeterminate" *ngIf="loader"></mat-progress-bar>
                         
                         <form action="">
                             
@@ -433,11 +434,13 @@
                                 </button>
                             </mat-form-field>
             
-                            
+                            <div class="content-error">
+                                <span class="message-error">{{messageError}}</span>
+                            </div>
             
                             <a style="cursor: pointer;" [routerLink]="['/olvidaste-tu-contraseña']">¿Olvidaste tu contraseña?</a>
             
-                            <button class="button" (click)="acceder()">ACCEDER</button>
+                            <button class="button" (click)="acceder()">{{messageButton}}</button>
                         </form>
             
                     </div>

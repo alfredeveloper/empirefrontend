@@ -1,0 +1,343 @@
+
+
+<div style="padding: 35px;">
+
+    <h2>Administración de clientes</h2>
+
+    <div style="margin-bottom: 20px;">
+        <!-- <button mat-raised-button (click)="sidenavAddClient.toggle()"> Agregar cliente </button> -->
+        <!-- <button mat-raised-button (click)="removeColumn()"> Remove column </button> -->
+        <!-- <button mat-raised-button (click)="shuffle()"> Shuffle </button> -->
+        <button class="button" (click)="sidenavAddClient.toggle()">Agregar cliente</button>
+
+    </div>
+    
+    <div>
+        <mat-tab-group>
+            <mat-tab label="Persona Natural">
+                <br>
+                <mat-form-field>
+                    <input matInput (keyup)="buscarPersonaNatural($event.target.value)" placeholder="Buscar">
+                </mat-form-field> 
+                <br>
+                <div
+                    class="mat-elevation-z8"
+                    >
+                    <table mat-table
+                        [dataSource]="dataSource2" 
+                        multiTemplateDataRows
+                        matSort>
+                        <ng-container matColumnDef="Nombres">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombres </th>
+                            <td mat-cell *matCellDef="let element"> {{element.Nombres}} </td>
+                        </ng-container>
+    
+                        <ng-container matColumnDef="Apellidos" >
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellidos </th>
+                            <td mat-cell *matCellDef="let element"> {{element.Apellidos}} </td>
+                        </ng-container>
+    
+                        <ng-container matColumnDef="DNI" >
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> DNI </th>
+                            <td mat-cell *matCellDef="let element"> {{element.DNI}} </td>
+                        </ng-container>
+    
+                        <ng-container matColumnDef="Correo" >
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Correo </th>
+                            <td mat-cell *matCellDef="let element"> {{element.Correo}} </td>
+                        </ng-container>
+    
+                        <ng-container matColumnDef="Estado" >
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+                            <td mat-cell *matCellDef="let element"> 
+                                <span class="status-aceptado" *ngIf="element.status == 'aceptado'">Aceptado</span>
+                                <span class="status-ingresado" *ngIf="element.status == 'ingresado'">Ingresado</span>
+                                <span class="status-evaluacion" *ngIf="element.status != 'aceptado' && element.status != 'ingresado' && element.status != 'rechazado'">En Evaluación</span>
+                                <span class="status-rechazado" *ngIf="element.status == 'rechazado'">Rechazado</span>
+                            </td>
+                        </ng-container>
+    
+                        <ng-container matColumnDef="Accion">
+                            <th mat-header-cell *matHeaderCellDef> Accion </th>
+                            <td mat-cell *matCellDef="let element" ngFor="let element of dataSource2">  
+                                <button *ngIf="element.status == 'en evaluacion'" (click)="aceptar(element.id)" mat-mini-fab aria-label="Example icon-button with a heart icon" style="background-color: green; padding-right: 0px !important; width: 32px; height: 32px;">
+                                    <mat-icon style="padding-right: 0px; font-size: 16px;">check</mat-icon>
+                                </button>
+                                &nbsp;
+                                <button *ngIf="element.status == 'en evaluacion'" (click)="rechazar(element.id)" mat-mini-fab aria-label="Example icon-button with a heart icon"  style="background-color: red; padding-right: 0px !important; width: 32px; height: 32px;">
+                                    <mat-icon style="padding-right: 0px; font-size: 16px;">close</mat-icon>
+                                </button>
+                            </td>
+                        </ng-container>
+    
+                        <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+                        <ng-container matColumnDef="expandedDetail">
+                            <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay2.length" ngFor="let element of dataSource2">
+                                <div class="example-element-detail"
+                                    [@detailExpand]="element == expandedElement2 ? 'expanded' : 'collapsed'"
+                                    style="box-shadow: 0 0px 0px 0 rgba(0,0,0,0.2); transition: 0.3s; width: 100%;">
+                                        <div class="example-element-diagram" >
+    
+                                            <div style="width: 33%; float: left;">
+                                                <h3>Datos Personales</h3>
+    
+                                                <p>{{element.Apellidos}} {{element.Nombres}}</p>
+                                                <p>{{element.departamento}} - {{element.provincia}} - {{element.distrito}}</p>
+                                                <p>{{element.direccion}}</p>
+                                                <p>{{element.genero}}</p>
+                                            </div>
+                                            <div style="width: 33%; float: left;">
+                                                <h3>Datos De Identificación</h3>
+                                                
+                                                <p>DNI: {{element.DNI}}</p>
+                                                <p>{{element.fechaNacimiento}}</p>
+                                                <p>{{element.Correo}}</p>
+                                                <p>{{element.telefono}}</p>
+                                            </div>
+                                            <div style="width: 33%; float: left;">
+                                                <h3>Datos Laborales</h3>
+                                                
+                                                <p>{{element.ocupacion}}</p>
+                                                <p>{{element.centroLaboral}}</p>
+                                                
+                                            </div>
+                                            
+                                        </div>
+                                        
+                                    
+                                </div>
+                            </td>
+                        </ng-container>
+    
+                        <tr mat-header-row *matHeaderRowDef="columnsToDisplay2"></tr>
+                        <tr mat-row *matRowDef="let element; columns: columnsToDisplay2;"
+                            class="example-element-row"
+                            [class.example-expanded-row]="expandedElement2 === element"
+                            (click)="expandedElement2 = expandedElement2 === element ? null : element">
+                        </tr>
+                        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+                    </table>
+
+                </div
+                >
+            
+                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+            </mat-tab>
+            <mat-tab label="Persona Juridica">
+                <br>
+                <mat-form-field>
+                    <input matInput (keyup)="buscarPersonaJuridica($event.target.value)" placeholder="Buscar">
+                </mat-form-field> 
+                <br>
+                <table mat-table
+                        [dataSource]="dataSource1" multiTemplateDataRows
+                        class="mat-elevation-z8">
+                    <ng-container matColumnDef="Razon_Social">
+                        <th mat-header-cell *matHeaderCellDef> Razon Social </th>
+                        <td mat-cell *matCellDef="let element" ngFor="let element of dataSource1"> {{element.Razon_Social}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Nombre_Comercial">
+                        <th mat-header-cell *matHeaderCellDef> Nombre Comercial </th>
+                        <td mat-cell *matCellDef="let element" ngFor="let element of dataSource1"> {{element.Nombre_Comercial}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="RUC">
+                        <th mat-header-cell *matHeaderCellDef> RUC </th>
+                        <td mat-cell *matCellDef="let element" ngFor="let element of dataSource1"> {{element.RUC}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Correo">
+                        <th mat-header-cell *matHeaderCellDef> Correo </th>
+                        <td mat-cell *matCellDef="let element" ngFor="let element of dataSource1"> {{element.Correo}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Estado">
+                        <th mat-header-cell *matHeaderCellDef> Estado </th>
+                        <td mat-cell *matCellDef="let element" ngFor="let element of dataSource1"> 
+                            <span class="status-aceptado" *ngIf="element.status == 'aceptado'">Aceptado</span>
+                            <span class="status-ingresado" *ngIf="element.status == 'ingresado'">Ingresado</span>
+                            <span class="status-evaluacion" *ngIf="element.status == 'evaluacion'">En Evaluación</span>
+                            <span class="status-rechazado" *ngIf="element.status == 'rechazado'">Rechazado</span>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Accion" >
+                        <th mat-header-cell *matHeaderCellDef> Accion </th>
+                        <td mat-cell *matCellDef="let element" ngFor="let element of dataSource1">  
+                            <button *ngIf="element.status == 'en evaluacion'" (click)="aceptar(element.id)" mat-mini-fab aria-label="Example icon-button with a heart icon" style="background-color: green; padding-right: 0px !important; width: 32px; height: 32px;">
+                                <mat-icon style="padding-right: 0px; font-size: 16px;">check</mat-icon>
+                            </button>
+                            &nbsp;
+                            <button *ngIf="element.status == 'en evaluacion'" (click)="rechazar(element.id)" mat-mini-fab aria-label="Example icon-button with a heart icon"  style="background-color: red; padding-right: 0px !important; width: 32px; height: 32px;">
+                                <mat-icon style="padding-right: 0px; font-size: 16px;">close</mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+
+                    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+                    <ng-container matColumnDef="expandedDetail">
+                        <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay1.length" ngFor="let element of dataSource1">
+
+                            <div class="example-element-detail"
+                            [@detailExpand]="element == expandedElement1 ? 'expanded' : 'collapsed'"
+                            style="box-shadow: 0 0px 0px 0 rgba(0,0,0,0.2); transition: 0.3s; width: 100%;">
+                                <div class="example-element-diagram" >
+
+                                    <div style="width: 25%; float: left;">
+                                        <h3>Datos Empresariales</h3>
+
+                                        <p>{{element.Nombre_Comercial}}</p>
+                                        <p>{{element.departamento}} - {{element.provincia}} - {{element.distrito}}</p>
+                                        <p>{{element.direccion}}</p>
+                                        <p>RUC: {{element.ruc}}</p>
+                                    </div>
+                                    <div style="width: 25%; float: left;">
+                                        <h3>Datos Personales</h3>
+
+                                        <p>{{element.nombresRepresentante}} {{element.ApellidosRepresentante}}</p>
+                                        <p>{{element.departamento}} - {{element.provincia}} - {{element.distrito}}</p>
+                                        <p>{{element.direccionRepresentante}}</p>
+                                        <p>{{element.generoRepresentante}}</p>
+                                    </div>
+                                    <div style="width: 25%; float: left;">
+                                        <h3>Datos De Identificación</h3>
+                                        
+                                        <p>DNI: {{element.numdocRepresentante}}</p>
+                                        <p>{{element.fechaNacimientoRepresentante}}</p>
+                                        <p>{{element.correoRepresentante}}</p>
+                                        <p>{{element.telefonoRepresentante}}</p>
+                                    </div>
+                                    <div style="width: 25%; float: left;">
+                                        <h3>Datos Laborales</h3>
+                                        
+                                        <p>{{element.ocupacionRepresentante}}</p>
+                                        <p>{{element.centroLaboralRepresentante}}</p>
+                                        
+                                    </div>
+                                    
+                                </div>
+                                
+                            
+                            </div>
+                                
+                            
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="columnsToDisplay1"></tr>
+                    <tr mat-row *matRowDef="let element; columns: columnsToDisplay1;"
+                        class="example-element-row"
+                        [class.example-expanded-row]="expandedElement1 === element"
+                        (click)="expandedElement1 = expandedElement1 === element ? null : element">
+                    </tr>
+                    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+                </table>
+                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+            </mat-tab>
+        </mat-tab-group>
+
+    </div>
+
+</div>
+  
+
+<mat-sidenav #sidenavAddClient [mode]="mode.value" position="end" style="width: 650px;" disableClose>
+
+    <button class="button-modal" mat-fab aria-label="Cerrar Modal" (click)="sidenavAddClient.close()" mat-disable-backdrop>
+        <mat-icon style="padding-right: 0px;">close</mat-icon>
+    </button>
+
+    <mat-tab-group>
+        <mat-tab label="Persona Natural">
+            
+            <div class="natural-section">
+                <h2>Datos Personales</h2>
+
+                <div class="sm-4 left">
+                    <mat-form-field>
+                        <input matInput placeholder="Apellido Paterno" [(ngModel)]="apellidoPaterno" name="apellidoPaterno">
+                    </mat-form-field>
+
+                </div>
+
+                <div class="sm-4 left">
+                    <mat-form-field>
+                        <input matInput placeholder="Apellido Materno" [(ngModel)]="apellidoMaterno" name="apellidoMaterno">
+                    </mat-form-field>
+
+                </div>
+                <div class="sm-4 left">
+                    <mat-form-field>
+                        <input matInput placeholder="Nombres" [(ngModel)]="nombres" name="nombres">
+                    </mat-form-field>
+
+                </div>
+            </div>
+            
+            <div class="natural-section">
+                <div class="sm-4 left">
+                    <mat-form-field>
+                        <input matInput placeholder="Correo Electrónico" [(ngModel)]="correoElectronicoPersona" name="correoElectronicoPersona">
+                    </mat-form-field>
+                </div>
+               
+                <div class="sm-4 left">
+                    <mat-form-field>
+                        <input matInput placeholder="DNI" [(ngModel)]="dni" name="dni">
+                    </mat-form-field>
+
+                </div>
+            </div>
+
+            
+
+            <div class="natural-section" style="padding-bottom: 60px;">
+                <button class="button" (click) = "registrarNatural(sidenavAddClient)">REGISTRAR</button>
+
+            </div>
+
+        </mat-tab>
+        <mat-tab label="Persona Jurídica"> 
+            
+            <div class="natural-section">
+                <h2>Datos Empresariales</h2>
+                <div class="sm-4 left">
+                    <mat-form-field>
+                        <input matInput placeholder="Razon Social" [(ngModel)]="razonSocial" name="razonSocial">
+                    </mat-form-field>
+                </div>
+                <div class="sm-4 left">
+                    <mat-form-field>
+                        <input matInput placeholder="Nombre Comercial" [(ngModel)]="nombreComercial" name="nombreComercial">
+                    </mat-form-field>
+                </div>
+                <div class="sm-4 left">
+                    <mat-form-field>
+                        <input matInput placeholder="RUC" [(ngModel)]="ruc" name="ruc">
+                    </mat-form-field>
+                </div>
+
+            </div>
+
+            <div class="natural-section">
+                <div class="sm-4 left">
+                    <mat-form-field>
+                        <input matInput placeholder="Correo Electrónico" [(ngModel)]="correoElectronicoEmpresa" name="correoElectronicoEmpresa">
+                    </mat-form-field>
+                </div>
+
+            </div>
+           
+            <div class="natural-section" style="padding-bottom: 60px;">
+
+                <button class="button" (click) = "registrarJuridica(sidenavAddClient)">REGISTRAR</button>
+
+            </div>
+                                    
+        </mat-tab>
+    </mat-tab-group>
+
+</mat-sidenav>

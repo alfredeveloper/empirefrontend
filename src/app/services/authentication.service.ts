@@ -5,7 +5,7 @@ import { environment } from '../../environments/environment';
 import { User } from '../models/user';
 
 import { map } from 'rxjs/operators';
-import { ChatService } from '../pages/services/chat.service';
+import { ChatService } from '../client/services/chat.service';
 
 @Injectable({
   providedIn: 'root'

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminComponent implements OnInit {
 
-  constructor() { }
+  hide = true;
+  mode = new FormControl('over');
+  shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
+  
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit() {
+  }
+
+  irANuevoCliente() {
+    this.router.navigate(['/admin-administrador-cliente'])
+  }
+
+  irANuevoCambioDeDatos() {
+    this.router.navigate(['/admin-administrador-chat'])
   }
 
 }

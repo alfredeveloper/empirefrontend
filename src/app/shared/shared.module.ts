@@ -8,12 +8,17 @@ import { PageTilesComponent } from './page-tiles/page-tiles.component';
 import { FooterComponent } from './footer/footer.component';
 import { RightSidebarComponent } from './right-sidebar/right-sidebar.component';
 import { BrowserModule } from '@angular/platform-browser';
+import { MaterialModule } from '../material.module';
+import { ErrorComponent } from './dialogs/error/error.component';
+import { SuccessComponent } from './dialogs/success/success.component';
+import { ConfirmationComponent } from './dialogs/confirmation/confirmation.component';
 
 @NgModule({
     imports: [
         BrowserModule,
         RouterModule,
         CommonModule,
+        MaterialModule
     ],
     declarations: [
         TopBarComponent,
@@ -21,6 +26,9 @@ import { BrowserModule } from '@angular/platform-browser';
         PageTilesComponent,
         FooterComponent,
         RightSidebarComponent,
+        ErrorComponent,
+        SuccessComponent,
+        ConfirmationComponent,
     ],
     exports: [
         TopBarComponent,

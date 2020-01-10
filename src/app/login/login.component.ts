@@ -78,6 +78,10 @@ export class LoginComponent implements OnInit {
   
   isNatural = true;
 
+  loader = false;
+  messageError = '';
+  messageButton = 'ACCEDER';
+
   constructor(
     public dialog: MatDialog,
     private _snackBar: MatSnackBar,
@@ -140,15 +144,17 @@ export class LoginComponent implements OnInit {
   }
 
   acceder() {
+    this.messageButton = "VERIFICANODO DATOS";
+    this.loader = true;
     if(
       (this.email == "" || this.password == "") ||
       (this.email == null || this.password == null) ||
       (this.email == undefined || this.password == undefined)
     ) {
+      this.loader = false;
 
-      this.openDialog('Ingrese su Correo electrónico y Contraseña')
-      
-
+      this.messageError = "Ingrese su Correo electrónico y Contraseña"
+      this.messageButton = "ACCEDER";
     }else {
 
       let body = {
@@ -161,7 +167,8 @@ export class LoginComponent implements OnInit {
           console.log('asdffadsf', response.clientId)
 
           if(response.status == true) {
-
+            this.loader = false;
+            this.messageButton = "ACCEDER";
             localStorage.setItem('clientId', response.clientId)
             localStorage.setItem('userId', response.data._id)
             localStorage.setItem('clientDirectId', response.clientDirectId)
@@ -199,20 +206,27 @@ export class LoginComponent implements OnInit {
               });
 
             } else {
-              this.openDialog('Inicio de sesion exitoso')
               this._router.navigate(['/admin-cliente'])
   
             }
 
           } else {
-            this.openDialog('Credenciales Incorrectas')
+            this.loader = false;
+            this.messageError = "Credenciales incorrectas"
+            this.email = "";
+            this.password = "";
+            this.messageButton = "ACCEDER";
           }
           console.log('response', response)
         },
         error => {
+          this.loader = false;
+
           console.log('error', error)
-          
-          this.openDialog('Credenciales Incorrectas')
+          this.email = "";
+          this.password = "";
+          this.messageError = "Credenciales incorrectas"
+          this.messageButton = "ACCEDER";
         }
       )
       

@@ -1,0 +1,22 @@
+<div style="padding: 35px;">
+
+    <h2>Balance Mensual</h2>
+
+    <div style="margin-bottom: 20px;">
+        <mat-form-field class="example-full-width">
+            <input matInput [matDatepicker]="picker" placeholder="Mes">
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <button mat-raised-button (click)="picker.open()">Mayo 2019</button>
+    </div>
+    <table mat-table [dataSource]="data" class="mat-elevation-z8" style="width: 100%;">
+    <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
+        <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+        <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+    </table>
+
+</div>
