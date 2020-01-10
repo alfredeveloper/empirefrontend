@@ -14,6 +14,7 @@ import { AdminClientChatComponent } from './admin-client-chat/admin-client-chat.
 import { AdminClientHelpComponent } from './admin-client-help/admin-client-help.component';
 import { AdminAdminChangePasswordComponent } from './admin-admin-change-password/admin-admin-change-password.component';
 import { MaterialModule } from '../material.module';
+import { AdminClientStatisticsComponent } from './admin-client-statistics/admin-client-statistics.component';
 
 @NgModule({
     declarations: [
@@ -24,6 +25,7 @@ import { MaterialModule } from '../material.module';
         AdminClientHelpComponent,
         AdminAdminChangePasswordComponent,
         AdminClientChangePasswordComponent,
+        AdminClientStatisticsComponent
 
     ],
     exports: [
@@ -45,7 +47,7 @@ import { MaterialModule } from '../material.module';
         AdminClientHelpComponent,
         AdminAdminChangePasswordComponent,
         AdminClientChangePasswordComponent,
-        
+        AdminClientStatisticsComponent
     ]
 })
 

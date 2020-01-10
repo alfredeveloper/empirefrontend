@@ -28,4 +28,8 @@ export class AdminComponent implements OnInit {
     this.router.navigate(['/admin-administrador-chat'])
   }
 
+  cerrarSesion() {
+    this.router.navigate(['/admin'])
+  }
+
 }
