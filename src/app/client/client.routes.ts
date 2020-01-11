@@ -20,7 +20,7 @@ const pagesRoutes: Routes = [
       { path: 'admin-cliente-help', component: AdminClientHelpComponent },
       { path: 'admin-cliente-cambio-contraseña', component: AdminAdminChangePasswordComponent },
       { path: 'cambio-de-contraseña', component: AdminClientChangePasswordComponent },  
-      { path: '', redirectTo: '/admin-cliente', pathMatch: 'full' },
+      { path: '', redirectTo: '/iniciar-sesion', pathMatch: 'full' },
     ]
   }
   

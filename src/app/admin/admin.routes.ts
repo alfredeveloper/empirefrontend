@@ -22,7 +22,7 @@ const pagesRoutes: Routes = [
       { path: 'admin-administrador-chat', component: AdminAdminChatComponent },
       { path: 'admin-administrador-ayuda', component: AdminAdminHelpComponent },
 
-      { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+      { path: '', redirectTo: '/iniciar-sesion', pathMatch: 'full' },
     ]
   }
   
