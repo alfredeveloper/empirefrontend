@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-confirmation',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConfirmationComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+
+    public dialogRef: MatDialogRef<ConfirmationComponent>,
+    @Inject(MAT_DIALOG_DATA) public message: string
+    
+  ) { }
 
   ngOnInit() {
+  }
+
+  onNoClick(): void {
+
+    this.dialogRef.close();
+  
   }
 
 }

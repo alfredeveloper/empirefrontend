@@ -92,7 +92,7 @@
 
             <div class="sm-3 left">
                 <mat-form-field>
-                    <input matInput placeholder="Número Doc. Identidad" [(ngModel)]="numDocumento" name="numDocumento" [disabled]="isDisabled" maxlength="8">
+                    <input matInput placeholder="Número Doc. Identidad" [(ngModel)]="numDocumento" name="numDocumento" [disabled]="isDisabled" maxlength="8" type="number" (keyup)="maximoTamanio('dni')">
                   </mat-form-field>
                 
             </div>
@@ -146,6 +146,13 @@
             <button mat-raised-button (click)="cancelar()">Cancelar</button>
         </div> -->
 
+        <div style="width: 50%">
+
+            <h3>Seleccionar Documentos</h3>
+
+            <app-upload-file ></app-upload-file>
+    
+        </div>
         <div class="natural-section" style="padding-bottom: 50px;">
             <button class="button" (click)="editar()" *ngIf="isDisabled">Editar</button> &nbsp;
             <button class="button" (click)="solicitarModificacionNatural()" *ngIf="!isDisabled">Solicitar modificación</button> &nbsp;
@@ -168,7 +175,7 @@
 
             <div class="sm-3 left">
                 <mat-form-field>
-                    <input matInput placeholder="R.U.C." [(ngModel)]="ruc" name="ruc" [disabled]="isDisabled" maxlength="11" type="number">
+                    <input matInput placeholder="R.U.C." [(ngModel)]="ruc" name="ruc" [disabled]="isDisabled" maxlength="11" type="number" (keyup)="maximoTamanio('ruc')">
                   </mat-form-field>
                 
             </div>
@@ -379,6 +386,13 @@
             &nbsp;
             <button mat-raised-button (click)="cancelar()">Cancelar</button>
         </div> -->
+
+        <div class="natural-section">
+
+            <app-upload-file ></app-upload-file>
+
+        </div>
+
 
         <div class="natural-section" style="padding-bottom: 50px;">
             <button class="button" (click)="editar()" *ngIf="isDisabled">Editar</button> &nbsp;

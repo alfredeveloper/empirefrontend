@@ -6,6 +6,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/
 import { Router } from '@angular/router';
 import { ServiceService } from '../services/service.service';
 import { ConfirmationDialogComponent } from '../shared/confirmation-dialog/confirmation-dialog.component';
+import { AuthenticationService } from '../services/authentication.service';
 
 export interface DialogData {
   passwordChange: string;
@@ -81,16 +82,49 @@ export class LoginComponent implements OnInit {
   loader = false;
   messageError = '';
   messageButton = 'ACCEDER';
+  
+  loaderCode = false;
+  messageErrorCode = '';
+  messageButtonCode = 'INICIAR REGISTRO';
+
+  recuerdame: boolean = false;
 
   constructor(
     public dialog: MatDialog,
     private _snackBar: MatSnackBar,
     private _router: Router,
-    private _service: ServiceService
+    private _service: ServiceService,
+    private _auth: AuthenticationService
   ) { }
 
   ngOnInit() {
     initLogin();
+    this.isAuth();
+
+  }
+
+  isAuth() {
+
+    if(localStorage.getItem('recuerdame') == 'true'){
+
+      this.recuerdame = true;
+
+      if(localStorage.getItem('currentUser')) {
+        
+        this.email = JSON.parse(localStorage.getItem('currentUser')).email
+
+      }
+
+    }
+
+    const auth = localStorage.getItem('auth');
+
+    if (auth === 'true') {
+
+      this._router.navigate(['/admin-cliente']);
+
+    }
+    
   }
 
   IniciarRegistro() {
@@ -98,11 +132,41 @@ export class LoginComponent implements OnInit {
 
   }
 
+  maximoTamanio(tipoDoc) {
+    console.log('afs', typeof this.numdoc)
+    if(tipoDoc == 'dni') {
+      if(this.numdoc != undefined) {
+        
+        let doc = this.numdoc.toString()
+  
+        if(doc.length > 8) {
+          
+          this.numdoc = doc.substring(0, 8)
+    
+        }
+      }
+
+    }
+
+    else if(tipoDoc == 'ruc') {
+      if(this.ruc != undefined) {
+        
+        let doc = this.ruc.toString()
+  
+        if(doc.length > 11) {
+          
+          this.ruc = doc.substring(0, 11)
+    
+        }
+      }
+    }
+  }
+
   ingresarCodigo(sidenav) {
 
     if( this.codigo == ""  || this.codigo == undefined || this.codigo == null ) {
 
-      this.openDialog('Ingrese su código de verificación')
+      this.messageErrorCode = 'Ingrese su código de verificación';
 
     } else {
       
@@ -112,16 +176,17 @@ export class LoginComponent implements OnInit {
 
       this._service.sendCode(body).subscribe(
         response => {
-          
+          console.log('response', response)
           if(response.status == true) {
-            localStorage.setItem('clientId', response.data._id)
+            localStorage.setItem('clientId', response.data[0]._id)
             sidenav.toggle()
-            if (response.data.typeClient == 'natural') {
+            if (response.data[0].typeClient == 'natural') {
+              console.log(response)
               this.isNatural = true
-              this.nombres = response.data.user.nombres
-              this.apellidoPaterno = response.data.user.apellidoPaterno
-              this.apellidoPaterno = response.data.user.apellidoMaterno
-              this.correoElectronico = response.data.user.correo
+              this.nombres = response.data[0].user.nombres
+              this.apellidoPaterno = response.data[0].user.apellidoPaterno
+              this.apellidoMaterno = response.data[0].user.apellidoMaterno
+              this.correoElectronico = response.data[0].user.correo
             }else {
               this.isNatural = false
               
@@ -162,7 +227,7 @@ export class LoginComponent implements OnInit {
         contrasenia: this.password
       }
 
-      this._service.login(body).subscribe(
+      this._auth.login(body).subscribe(
         response => {
           console.log('asdffadsf', response.clientId)
 
@@ -248,39 +313,64 @@ export class LoginComponent implements OnInit {
   }
 
   actualizarDatosPersonales(sidenav) {
-    console.log('asdfasf')
-    let body = {
-      typeClient: "natural",
-      apellidoPaterno: this.apellidoPaterno,
-      apellidoMaterno: this.apellidoMaterno,
-      nombres: this.nombres,
-      departamento: this.departamento,
-      provincia: this.provincia,
-      distrito: this.distrito,
-      direccion: this.direccion,
-      genero: this.genero,
-      tipoDocumento: this.tipoDocumento,
-      numDocumento: this.numdoc,
-      fechaNacimiento: this.fechaNacimiento,
-      correo: this.correoElectronico,
-      telefono: this.telefono,
-      ocupacion: this.ocupacion,
-      centroLaboral: this.centroLaboral,
-      id: localStorage.getItem('clientId')
+
+    if(
+      this.apellidoPaterno == "" || this.apellidoPaterno == undefined || this.apellidoPaterno == null ||
+      this.apellidoMaterno == "" || this.apellidoMaterno == undefined || this.apellidoMaterno == null ||
+      this.nombres == "" || this.nombres == undefined || this.nombres == "" ||
+      this.departamento == "" || this.departamento == undefined || this.departamento == null ||
+      this.provincia == "" || this.provincia ==  undefined|| this.provincia == null ||
+      this.distrito == "" || this.distrito == undefined || this.distrito == null ||
+      this.direccion == "" || this.direccion == undefined || this.direccion == null ||
+      this.genero == "" || this.genero == undefined || this.genero == null ||
+      this.tipoDocumento == "" || this.tipoDocumento == undefined || this.tipoDocumento == null ||
+      this.numdoc == "" || this.numdoc == undefined || this.numdoc == null ||
+      this.fechaNacimiento == "" || this.fechaNacimiento == undefined || this.fechaNacimiento == null ||
+      this.telefono == "" || this.telefono ==  undefined|| this.telefono == null || 
+      this.ocupacion == "" || this.ocupacion == undefined || this.ocupacion == null ||
+      this.centroLaboral == "" || this.centroLaboral == undefined || this.centroLaboral == null
+    ) {
+      alert('Todos los campos del formulario son obligatorios.');
+
+    } else {
+      
+      console.log('asdfasf')
+      let body = {
+        typeClient: "natural",
+        apellidoPaterno: this.apellidoPaterno,
+        apellidoMaterno: this.apellidoMaterno,
+        nombres: this.nombres,
+        departamento: this.departamento,
+        provincia: this.provincia,
+        distrito: this.distrito,
+        direccion: this.direccion,
+        genero: this.genero,
+        tipoDocumento: this.tipoDocumento,
+        numDocumento: this.numdoc,
+        fechaNacimiento: this.fechaNacimiento,
+        correo: this.correoElectronico,
+        telefono: this.telefono,
+        ocupacion: this.ocupacion,
+        centroLaboral: this.centroLaboral,
+        id: localStorage.getItem('clientId')
+      }
+  
+      console.log('body', body)
+  
+      this._service.updateClient(body).subscribe(
+        response => {
+          console.log('response', response);
+          alert('Registro completado');
+          sidenav.close();
+        },
+        error => {
+          console.log('error', error)
+        }
+      )
+
     }
 
-    console.log('body', body)
 
-    this._service.updateClient(body).subscribe(
-      response => {
-        console.log('response', response);
-        alert('Registro completado');
-        sidenav.close();
-      },
-      error => {
-        console.log('error', error)
-      }
-    )
 
   }
 

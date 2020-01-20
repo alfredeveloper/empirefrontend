@@ -20,6 +20,8 @@ import { SharedModule } from './shared/shared.module';
 import { AdminModule } from './admin/admin.module';
 import { ConfirmationDialogComponent } from './shared/confirmation-dialog/confirmation-dialog.component';
 import { ClientModule } from './client/client.module';
+import { DragDropDirective } from './client/directives/drag-and-drop.directive';
+import { LoginGuard } from './guards/login.guard';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,7 @@ import { ClientModule } from './client/client.module';
     AdminLoginComponent,
     ForgotPasswordComponent,
     ChangePasswordClientDialog,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,7 +48,7 @@ import { ClientModule } from './client/client.module';
     AdminModule,
     ClientModule
   ],
-  providers: [],
+  providers: [LoginGuard],
   bootstrap: [AppComponent],
   entryComponents: [
     ChangePasswordClientDialog,

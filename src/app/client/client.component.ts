@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-client',
@@ -14,7 +15,8 @@ export class ClientComponent implements OnInit {
   shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
   
   constructor(
-    private router: Router
+    private router: Router,
+    private _authService: AuthenticationService
   ) { }
 
   ngOnInit() {
@@ -25,7 +27,7 @@ export class ClientComponent implements OnInit {
   }
 
   cerrarSesion() {
-    this.router.navigate(['/iniciar-sesion'])
+    this._authService.logout()
 
   }
 

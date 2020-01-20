@@ -74,6 +74,36 @@ export class AdminClientConfigurationComponent implements OnInit {
 
   }
 
+  maximoTamanio(tipoDoc) {
+    console.log('afs', typeof this.numDocumento)
+    if(tipoDoc == 'dni') {
+      if(this.numDocumento != undefined) {
+        
+        let doc = this.numDocumento.toString()
+  
+        if(doc.length > 8) {
+          
+          this.numDocumento = doc.substring(0, 8)
+    
+        }
+      }
+
+    }
+
+    else if(tipoDoc == 'ruc') {
+      if(this.ruc != undefined) {
+        
+        let doc = this.ruc.toString()
+  
+        if(doc.length > 11) {
+          
+          this.ruc = doc.substring(0, 11)
+    
+        }
+      }
+    }
+  }
+
   openDialog(message): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       width: '300px',

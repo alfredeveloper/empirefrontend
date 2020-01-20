@@ -1,0 +1,72 @@
+<div>
+
+    <br>
+    <mat-form-field>
+        <input matInput (keyup)="buscarRechazados($event.target.value)" placeholder="Buscar">
+    </mat-form-field>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+        
+        <!-- Position Column -->
+        <ng-container matColumnDef="ticket">
+            <th mat-header-cell *matHeaderCellDef> Ticket </th>
+            <td mat-cell *matCellDef="let element" ngFor="let element of dataSource"> asd </td>
+        </ng-container>
+        
+        <!-- Name Column -->
+        <ng-container matColumnDef="solicitud">
+            <th mat-header-cell *matHeaderCellDef> Solicitud </th>
+            <td mat-cell *matCellDef="let element" ngFor="let element of dataSource"> {{element.solicitud}} </td>
+        </ng-container>
+        
+        <!-- Weight Column -->
+        <ng-container matColumnDef="fecha_solicitud">
+            <th mat-header-cell *matHeaderCellDef> Fecha Solicitud </th>
+            <td mat-cell *matCellDef="let element" ngFor="let element of dataSource"> {{element.fecha_solicitud}} </td>
+        </ng-container>
+        
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="fecha_Respuesta">
+            <th mat-header-cell *matHeaderCellDef> Fecha Respuesta </th>
+            <td mat-cell *matCellDef="let element" ngFor="let element of dataSource"> {{element.fecha_Respuesta}} </td>
+        </ng-container>
+
+            <!-- Symbol Column -->
+        <ng-container matColumnDef="resultado">
+            <th mat-header-cell *matHeaderCellDef> Resultado </th>
+            <td mat-cell *matCellDef="let element" ngFor="let element of dataSource"> {{element.resultado}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef> Nombres </th>
+            <td mat-cell *matCellDef="let element" ngFor="let element of dataSource"> {{element.nombre}}</td>
+        </ng-container>
+            
+        <ng-container matColumnDef="ruc">
+            <th mat-header-cell *matHeaderCellDef> R.U.C. </th>
+            <td mat-cell *matCellDef="let element" ngFor="let element of dataSource"> {{element.ruc}} </td>
+        </ng-container>
+        
+        <!-- Accion -->
+        <ng-container matColumnDef="accion">
+            <th mat-header-cell *matHeaderCellDef> Accion </th>
+            <td mat-cell *matCellDef="let element" ngFor="let element of dataSource"> 
+                <button *ngIf="element.resultado == 'pendiente'" (click)="aprobar(element.id)" mat-mini-fab aria-label="Example icon-button with a heart icon" style="background-color: green; padding-right: 0px !important; width: 32px; height: 32px;">
+                    <mat-icon style="padding-right: 0px; font-size: 16px;">check</mat-icon>
+                </button>   
+                &nbsp;
+                <button *ngIf="element.resultado == 'pendiente'" (click)="denegar(element.id)" mat-mini-fab aria-label="Example icon-button with a heart icon" style="background-color: red; padding-right: 0px !important; width: 32px; height: 32px;">
+                    <mat-icon style="padding-right: 0px; font-size: 16px;">close</mat-icon>
+                </button>   
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>  
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+</div>

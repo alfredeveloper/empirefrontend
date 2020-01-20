@@ -15,6 +15,7 @@ import { AdminClientHelpComponent } from './admin-client-help/admin-client-help.
 import { AdminAdminChangePasswordComponent } from './admin-admin-change-password/admin-admin-change-password.component';
 import { MaterialModule } from '../material.module';
 import { AdminClientStatisticsComponent } from './admin-client-statistics/admin-client-statistics.component';
+import { DragDropDirective } from './directives/drag-and-drop.directive';
 
 @NgModule({
     declarations: [
@@ -25,8 +26,8 @@ import { AdminClientStatisticsComponent } from './admin-client-statistics/admin-
         AdminClientHelpComponent,
         AdminAdminChangePasswordComponent,
         AdminClientChangePasswordComponent,
-        AdminClientStatisticsComponent
-
+        AdminClientStatisticsComponent,
+        DragDropDirective
     ],
     exports: [
     ],

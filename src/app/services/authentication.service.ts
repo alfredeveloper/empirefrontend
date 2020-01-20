@@ -6,6 +6,7 @@ import { User } from '../models/user';
 
 import { map } from 'rxjs/operators';
 import { ChatService } from '../client/services/chat.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -22,50 +23,73 @@ export class AuthenticationService {
   constructor(
     private http: HttpClient,
     private chatService: ChatService,
+    private router: Router
   ) { }
 
   public getToken(): string {
     return localStorage.getItem('token');
   }
 
-  login(user: User): Observable<any> {
-    const data_user = {
-      email: user.correo, 
-      password: user.contrasenia,
-      mobile_token: 'seraesra'
-    };
-    console.log(data_user);
-    return this.http.post<any>(`${environment.apiUrl}/api/login/`, data_user)
-    .pipe(map(data => {
-      console.log(data);
-      if (data && data.token) {
-        localStorage.setItem('currentUser', JSON.stringify(data.data.user));
-        localStorage.setItem('token', data.token);
+  login(data): Observable<any> {
+    
+    return this.http.post<any>(`${environment.apiUrl}/api/login`, data)
+    .pipe(map(response => {
+      
+      if (response.status) {
+        localStorage.setItem('currentUser', JSON.stringify(response.data));
+        localStorage.setItem('token', response.token);
         localStorage.setItem('auth', 'true'); // Change for verify token
         localStorage.setItem('map', 'true');
-        localStorage.setItem('manager_id', data.data.manager._id)
-        // this.getGroups(data.user.id);
-        // this.currentUserSubject.next(data);
-        // this.userAuthenticated = true;
-        return data;
+        localStorage.setItem('clientId', response.clientId)
+        localStorage.setItem('clientDirectId', response.clientDirectId)
+        return response;
       }
-      this.dataSocket.userId = data.data.user._id;
-      this.dataSocket.name = data.data.user.name;
-      this.dataSocket.lastname = data.data.user.lastnamepat;
       console.log('enter room');
-      // this.chatService.enterTo(this.dataSocket, false);
-      return data;
+      return response;
     })
     );
   }
+
   logout() {
     localStorage.removeItem('currentUser');
     localStorage.removeItem('token');
     localStorage.removeItem('map');
     localStorage.removeItem('auth');
-    localStorage.removeItem('manager_id');
-    // this.chatService.disconnect();
-    // this.userAuthenticated = false;
-    // this.currentUserSubject.next(null);
+    localStorage.removeItem('clientId');
+    localStorage.removeItem('clientDirectId');
+    this.router.navigate(['/iniciar-sesion'])
+
+  }
+
+  loginAdmin(data): Observable<any> {
+    
+    return this.http.post<any>(`${environment.apiUrl}/api/login/admin`, data)
+    .pipe(map(response => {
+      
+      if (response.status) {
+        localStorage.setItem('currentUserAdmin', JSON.stringify(response.data));
+        localStorage.setItem('tokenAdmin', response.token);
+        localStorage.setItem('authAdmin', 'true'); // Change for verify token
+        localStorage.setItem('mapAdmin', 'true');
+        localStorage.setItem('clientId', response.clientId)
+        localStorage.setItem('clientDirectId', response.clientDirectId)
+        return response;
+      }
+      console.log('enter room');
+      return response;
+    })
+    );
+  }
+
+  logoutAdmin() {
+    localStorage.removeItem('currentUserAdmin');
+    localStorage.removeItem('tokenAdmin');
+    localStorage.removeItem('mapAdmin');
+    localStorage.removeItem('authAdmin');
+    localStorage.removeItem('clientId');
+    localStorage.removeItem('clientDirectId');
+
+    this.router.navigate(['/admin'])
+
   }
 }

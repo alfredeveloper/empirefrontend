@@ -12,6 +12,7 @@ import { MaterialModule } from '../material.module';
 import { ErrorComponent } from './dialogs/error/error.component';
 import { SuccessComponent } from './dialogs/success/success.component';
 import { ConfirmationComponent } from './dialogs/confirmation/confirmation.component';
+import { UploadFileComponent } from './upload-file/upload-file.component';
 
 @NgModule({
     imports: [
@@ -29,6 +30,7 @@ import { ConfirmationComponent } from './dialogs/confirmation/confirmation.compo
         ErrorComponent,
         SuccessComponent,
         ConfirmationComponent,
+        UploadFileComponent,
     ],
     exports: [
         TopBarComponent,
@@ -36,6 +38,13 @@ import { ConfirmationComponent } from './dialogs/confirmation/confirmation.compo
         PageTilesComponent,
         FooterComponent,
         RightSidebarComponent,
+        UploadFileComponent
+    ],
+    entryComponents: [
+        ErrorComponent,
+        SuccessComponent,
+        ConfirmationComponent,
+        UploadFileComponent
     ]
 })
 

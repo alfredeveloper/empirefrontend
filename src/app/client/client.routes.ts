@@ -12,7 +12,7 @@ const pagesRoutes: Routes = [
   {
     path: '',
     component: ClientComponent,
-    // canActivate: [LoginGuard],
+    canActivate: [LoginGuard],
     children: [
       { path: 'admin-cliente', component: AdminClientComponent },
       { path: 'admin-cliente-configuration', component: AdminClientConfigurationComponent },

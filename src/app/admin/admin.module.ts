@@ -14,6 +14,12 @@ import { AdminAdminClientComponent } from './admin-admin-client/admin-admin-clie
 import { AdminAdminChatComponent } from './admin-admin-chat/admin-admin-chat.component';
 import { AdminAdminHelpComponent } from './admin-admin-help/admin-admin-help.component';
 import { MaterialModule } from '../material.module';
+import { NaturalComponent } from './admin-admin-client/natural/natural.component';
+import { JuridicalComponent } from './admin-admin-client/juridical/juridical.component';
+import { RejectedsComponent } from './admin-admin-chat/rejecteds/rejecteds.component';
+import { AcceptedsComponent } from './admin-admin-chat/accepteds/accepteds.component';
+import { NaturalNotificationComponent } from './admin-admin-chat/natural-notification/natural-notification.component';
+import { JuridicalNotificationComponent } from './admin-admin-chat/juridical-notification/juridical-notification.component';
 
 @NgModule({
     declarations: [
@@ -22,7 +28,13 @@ import { MaterialModule } from '../material.module';
         AdminAdminDashboardComponent,
         AdminAdminClientComponent,
         AdminAdminChatComponent,
-        AdminAdminHelpComponent
+        AdminAdminHelpComponent,
+        NaturalComponent,
+        JuridicalComponent,
+        RejectedsComponent,
+        AcceptedsComponent,
+        NaturalNotificationComponent,
+        JuridicalNotificationComponent
     ],
     exports: [
         DashboardComponent,

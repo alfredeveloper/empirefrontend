@@ -87,7 +87,7 @@
 
                     <div class="sm-4 left">
                         <mat-form-field>
-                            <input matInput placeholder="Numero Documento" [(ngModel)]="numdoc" name="numdoc">
+                            <input matInput placeholder="Numero Documento" (keyup)="maximoTamanio('dni')" [(ngModel)]="numdoc" name="numdoc" type="number">
                         </mat-form-field>
 
                     </div>
@@ -118,6 +118,8 @@
                         </mat-form-field>
 
                     </div>
+
+                   
                 </div>
 
                 <div class="natural-section">
@@ -159,7 +161,7 @@
 
                     <div class="sm-4 left">
                         <mat-form-field>
-                            <input matInput placeholder="R.U.C." [(ngModel)]="ruc" name="ruc">
+                            <input matInput placeholder="R.U.C." [(ngModel)]="ruc" name="ruc" (keyup)="maximoTamanio('ruc')" type="number">
                         </mat-form-field>
                     </div>
                     
@@ -392,14 +394,16 @@
                             <div class="overlay-panel overlay-left">
                                 <img src="assets/images/Isotipo.png" alt="" width="200px">
                                 <br>
-                                <h1>¿Recordaste tus accesos?</h1>
-                                <p>Regresa al login para acceder con tus datos</p>
+                                <h1>Regresa al login para acceder con tus datos</h1>
+                                <br>
                                 <button class="ghost button" id="signIn">REGRESAR</button>
                             </div>
                         </div>
                     </div>
                     
                     <div class="form-container sign-up-container">
+                        <mat-progress-bar mode="indeterminate" *ngIf="loaderCode"></mat-progress-bar>
+
                         <form action="#">
                             
                             <h1>Ingresa el código de solicitud</h1>
@@ -407,10 +411,14 @@
                             <br>
             
                             <mat-form-field>
-                                <input matInput placeholder="Código" [(ngModel)] = "codigo" name="codigo">
+                                <input matInput placeholder="Código" [(ngModel)] = "codigo" name="codigo" (keyup)="messageErrorCode = ''">
                             </mat-form-field>
-            
-                            <button class="button" (click)="ingresarCodigo(sidenav)">INICIAR REGISTRO</button>
+
+                            <div class="content-error">
+                                <span class="message-error">{{messageErrorCode}}</span>
+                            </div>
+                            <br>
+                            <button class="button" (click)="ingresarCodigo(sidenav)">{{messageButtonCode}}</button>
                         </form>
                     </div>
             
@@ -424,11 +432,11 @@
                             <br>
                             
                             <mat-form-field>
-                                <input matInput placeholder="Correo electrónico" [(ngModel)]="email" name="email">
+                                <input matInput placeholder="Correo electrónico" [(ngModel)]="email" name="email" (keyup)="messageError = ''">
                             </mat-form-field>
             
                             <mat-form-field>
-                                <input matInput placeholder="Contraseña" [type]="hide ? 'password' : 'text'" [(ngModel)]="password" name="password">
+                                <input matInput placeholder="Contraseña" [type]="hide ? 'password' : 'text'" [(ngModel)]="password" name="password" (keyup)="messageError = ''">
                                 <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                                     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                                 </button>

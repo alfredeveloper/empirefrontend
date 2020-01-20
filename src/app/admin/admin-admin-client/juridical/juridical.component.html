@@ -1,0 +1,114 @@
+<div>
+
+    <br>
+    <mat-form-field style="width: 100%;">
+        <input matInput (keyup)="buscarPersonaJuridica($event.target.value)" placeholder="Buscar">
+    </mat-form-field> 
+    <br>
+
+    <table mat-table
+            [dataSource]="dataSource" multiTemplateDataRows
+            class="mat-elevation-z8">
+        <ng-container matColumnDef="Razon_Social">
+            <th mat-header-cell *matHeaderCellDef> Razon Social </th>
+            <td mat-cell *matCellDef="let element"> {{element.Razon_Social}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Nombre_Comercial">
+            <th mat-header-cell *matHeaderCellDef> Nombre Comercial </th>
+            <td mat-cell *matCellDef="let element"> {{element.Nombre_Comercial}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="RUC">
+            <th mat-header-cell *matHeaderCellDef> RUC </th>
+            <td mat-cell *matCellDef="let element"> {{element.RUC}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Correo">
+            <th mat-header-cell *matHeaderCellDef> Correo </th>
+            <td mat-cell *matCellDef="let element"> {{element.Correo}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Estado">
+            <th mat-header-cell *matHeaderCellDef> Estado </th>
+            <td mat-cell *matCellDef="let element"> 
+                <span class="status-aceptado" *ngIf="element.status == 'aceptado'">Aceptado</span>
+                <span class="status-ingresado" *ngIf="element.status == 'ingresado'">Ingresado</span>
+                <span class="status-evaluacion" *ngIf="element.status == 'evaluacion'">En Evaluación</span>
+                <span class="status-rechazado" *ngIf="element.status == 'rechazado'">Rechazado</span>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Accion" >
+            <th mat-header-cell *matHeaderCellDef> Accion </th>
+            <td mat-cell *matCellDef="let element">  
+                <button *ngIf="element.status == 'en evaluacion'" (click)="aceptar(element.id)" mat-mini-fab aria-label="Example icon-button with a heart icon" style="background-color: green; padding-right: 0px !important; width: 32px; height: 32px;">
+                    <mat-icon style="padding-right: 0px; font-size: 16px;">check</mat-icon>
+                </button>
+                &nbsp;
+                <button *ngIf="element.status == 'en evaluacion'" (click)="rechazar(element.id)" mat-mini-fab aria-label="Example icon-button with a heart icon"  style="background-color: red; padding-right: 0px !important; width: 32px; height: 32px;">
+                    <mat-icon style="padding-right: 0px; font-size: 16px;">close</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="expandedDetail">
+            <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+
+                <div class="example-element-detail"
+                [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'"
+                style="box-shadow: 0 0px 0px 0 rgba(0,0,0,0.2); transition: 0.3s; width: 100%;">
+                    <div class="example-element-diagram" >
+
+                        <div style="width: 25%; float: left;">
+                            <h3>Datos Empresariales</h3>
+
+                            <p>{{element.Nombre_Comercial}}</p>
+                            <p>{{element.departamento}} - {{element.provincia}} - {{element.distrito}}</p>
+                            <p>{{element.direccion}}</p>
+                            <p>RUC: {{element.ruc}}</p>
+                        </div>
+                        <div style="width: 25%; float: left;">
+                            <h3>Datos Personales</h3>
+
+                            <p>{{element.nombresRepresentante}} {{element.ApellidosRepresentante}}</p>
+                            <p>{{element.departamento}} - {{element.provincia}} - {{element.distrito}}</p>
+                            <p>{{element.direccionRepresentante}}</p>
+                            <p>{{element.generoRepresentante}}</p>
+                        </div>
+                        <div style="width: 25%; float: left;">
+                            <h3>Datos De Identificación</h3>
+                            
+                            <p>DNI: {{element.numdocRepresentante}}</p>
+                            <p>{{element.fechaNacimientoRepresentante}}</p>
+                            <p>{{element.correoRepresentante}}</p>
+                            <p>{{element.telefonoRepresentante}}</p>
+                        </div>
+                        <div style="width: 25%; float: left;">
+                            <h3>Datos Laborales</h3>
+                            
+                            <p>{{element.ocupacionRepresentante}}</p>
+                            <p>{{element.centroLaboralRepresentante}}</p>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                
+                </div>
+                    
+                
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
+            class="example-element-row"
+            [class.example-expanded-row]="expandedElement === element"
+            (click)="expandedElement = expandedElement === element ? null : element">
+        </tr>
+        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+</div>
