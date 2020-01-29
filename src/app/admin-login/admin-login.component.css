@@ -247,3 +247,10 @@ footer a {
     text-decoration: none;
 }
 
+.message-error {
+	color: red;
+}
+
+.content-error {
+	text-align: left;
+}

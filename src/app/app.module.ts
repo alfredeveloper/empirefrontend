@@ -22,6 +22,7 @@ import { ConfirmationDialogComponent } from './shared/confirmation-dialog/confir
 import { ClientModule } from './client/client.module';
 import { DragDropDirective } from './client/directives/drag-and-drop.directive';
 import { LoginGuard } from './guards/login.guard';
+import { LoginAdminGuard } from './guards/login-admin.guard';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,7 @@ import { LoginGuard } from './guards/login.guard';
     AdminModule,
     ClientModule
   ],
-  providers: [LoginGuard],
+  providers: [LoginGuard, LoginAdminGuard],
   bootstrap: [AppComponent],
   entryComponents: [
     ChangePasswordClientDialog,

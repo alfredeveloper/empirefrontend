@@ -163,10 +163,15 @@ export class LoginComponent implements OnInit {
   }
 
   ingresarCodigo(sidenav) {
+    
+    this.messageButtonCode = "VERIFICANDO";
+    this.loaderCode = true;
 
     if( this.codigo == ""  || this.codigo == undefined || this.codigo == null ) {
 
       this.messageErrorCode = 'Ingrese su código de verificación';
+      this.messageButtonCode = "INICIAR REGISTRO";
+      this.loaderCode = false;
 
     } else {
       
@@ -178,29 +183,44 @@ export class LoginComponent implements OnInit {
         response => {
           console.log('response', response)
           if(response.status == true) {
-            localStorage.setItem('clientId', response.data[0]._id)
-            sidenav.toggle()
-            if (response.data[0].typeClient == 'natural') {
-              console.log(response)
-              this.isNatural = true
-              this.nombres = response.data[0].user.nombres
-              this.apellidoPaterno = response.data[0].user.apellidoPaterno
-              this.apellidoMaterno = response.data[0].user.apellidoMaterno
-              this.correoElectronico = response.data[0].user.correo
-            }else {
-              this.isNatural = false
+            if (response.data.length == 0) {
+              this.messageButtonCode = "INICIAR REGISTRO";
+              this.messageErrorCode = "Código no existente";
+              this.loaderCode = false;
+            } else {
+              this.messageButtonCode = "INICIAR REGISTRO";
+              this.loaderCode = false;
               
-              this.correoElectronicoJuridico = response.data.user.correo
+              localStorage.setItem('clientId', response.data[0]._id)
+              sidenav.toggle()
+
+              if (response.data[0].typeClient == 'natural') {
+                console.log(response)
+                this.isNatural = true
+                this.nombres = response.data[0].user.nombres
+                this.apellidoPaterno = response.data[0].user.apellidoPaterno
+                this.apellidoMaterno = response.data[0].user.apellidoMaterno
+                this.correoElectronico = response.data[0].user.correo
+                this.numdoc = response.data[0].user.numDocumento
+                this.tipoDocumento = "01"
+              }else {
+                this.isNatural = false
+                
+                this.correoElectronicoJuridico = response.data.user.correo
+              }
+
             }
           } else {
-            
-            this.openDialog('Código no existente')
-          }
+            this.messageErrorCode = 'Código no existente'
+            this.messageButtonCode = "INICIAR REGISTRO";
+            this.loaderCode = false;          }
         },
         error => {
           console.log('error', error)
+          this.messageErrorCode = 'Código no existente'
+          this.messageButtonCode = "INICIAR REGISTRO";
+          this.loaderCode = false;
 
-          this.openDialog('Código no existente')
         }
       )
 
@@ -209,7 +229,7 @@ export class LoginComponent implements OnInit {
   }
 
   acceder() {
-    this.messageButton = "VERIFICANODO DATOS";
+    this.messageButton = "VERIFICANDO DATOS";
     this.loader = true;
     if(
       (this.email == "" || this.password == "") ||
@@ -232,8 +252,10 @@ export class LoginComponent implements OnInit {
           console.log('asdffadsf', response.clientId)
 
           if(response.status == true) {
+
             this.loader = false;
             this.messageButton = "ACCEDER";
+            
             localStorage.setItem('clientId', response.clientId)
             localStorage.setItem('userId', response.data._id)
             localStorage.setItem('clientDirectId', response.clientDirectId)
@@ -299,7 +321,7 @@ export class LoginComponent implements OnInit {
   
   }
 
-  openDialog(message): void {
+  openDialog (message): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       width: '300px',
       data: message
@@ -354,9 +376,7 @@ export class LoginComponent implements OnInit {
         centroLaboral: this.centroLaboral,
         id: localStorage.getItem('clientId')
       }
-  
-      console.log('body', body)
-  
+    
       this._service.updateClient(body).subscribe(
         response => {
           console.log('response', response);
@@ -369,8 +389,6 @@ export class LoginComponent implements OnInit {
       )
 
     }
-
-
 
   }
 

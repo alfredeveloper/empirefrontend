@@ -44,7 +44,8 @@
             </div>
     
             <div class="form-container sign-in-container">
-                
+                <mat-progress-bar mode="indeterminate" *ngIf="loader"></mat-progress-bar>
+
                 <form action="">
                     
                     <h1>Ingreso a cuenta administrador</h1>
@@ -52,19 +53,23 @@
                     <br>
                     
                     <mat-form-field>
-                        <input matInput placeholder="Correo electrónico" [(ngModel)]="email" name="email">
+                        <input matInput placeholder="Correo electrónico" [(ngModel)]="email" name="email" (keyup)="messageError=''">
                     </mat-form-field>
     
                     <mat-form-field>
-                        <input matInput placeholder="Contraseña" [type]="hide ? 'password' : 'text'" [(ngModel)]="password" name="password">
+                        <input matInput placeholder="Contraseña" [type]="hide ? 'password' : 'text'" [(ngModel)]="password" name="password" (keyup)="messageError=''">
                         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                         </button>
                     </mat-form-field>
+
+                    <div class="content-error">
+                        <span class="message-error">{{messageError}}</span>
+                    </div>
     
                     <a style="cursor: pointer;" [routerLink]="['/olvidaste-tu-contraseña']">¿Olvidaste tu contraseña?</a>
     
-                    <button class="button" (click)="acceder()">ACCEDER</button>
+                    <button class="button" (click)="acceder()">{{ messageButton }}</button>
                 </form>
     
             </div>

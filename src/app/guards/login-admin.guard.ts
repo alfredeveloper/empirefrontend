@@ -13,7 +13,7 @@ export class LoginAdminGuard implements CanActivate {
 
   canActivate() {
 
-    if ( this.userService.estaLogueado() ) {
+    if ( this.userService.estaLogueadoAdmin() ) {
       return true;
     } else {
       console.log( 'Bloqueado por guard' );

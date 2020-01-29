@@ -66,7 +66,7 @@ export class JuridicalComponent implements OnInit {
         response.data.juridical.forEach(element => {
           let j = {
             Razon_Social: element.razonSocial,
-            Nombre_Comercial: element.partidaRegistral,
+            Nombre_Comercial: element.nombreComercial,
             RUC: element.ruc,
             Correo: element.client.user.correo,
             Estado: element.client.user.status,

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-admin',
@@ -14,7 +15,8 @@ export class AdminComponent implements OnInit {
   shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
   
   constructor(
-    private router: Router
+    private router: Router,
+    private _auth: AuthenticationService
   ) { }
 
   ngOnInit() {
@@ -29,7 +31,8 @@ export class AdminComponent implements OnInit {
   }
 
   cerrarSesion() {
-    this.router.navigate(['/admin'])
+    
+    this._auth.logoutAdmin()
   }
 
 }

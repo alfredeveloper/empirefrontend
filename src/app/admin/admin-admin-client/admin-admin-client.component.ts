@@ -69,7 +69,8 @@ export class AdminAdminClientComponent implements OnInit {
     if(this.apellidoPaterno == "" || this.apellidoPaterno == null || this.apellidoPaterno == undefined ||
     this.apellidoMaterno == "" || this.apellidoMaterno == null ||this.apellidoMaterno == undefined ||
     this.nombres == "" || this.nombres == null || this.nombres == undefined ||
-    this.correoElectronicoPersona == "" || this.correoElectronicoPersona == null || this.correoElectronicoPersona == undefined
+    this.correoElectronicoPersona == "" || this.correoElectronicoPersona == null || this.correoElectronicoPersona == undefined ||
+    this.dni == "" || this.dni == null || this.dni == undefined
     ) {
 
       this.openDialog("Ingrese todos los campos");
@@ -80,9 +81,10 @@ export class AdminAdminClientComponent implements OnInit {
         apellidoMaterno: this.apellidoMaterno,
         nombres: this.nombres,
         correo: this.correoElectronicoPersona,
-        numDocumento: this.dni,
+        numDocumento: this.dni.toString(),
         tipoCliente: "natural"
       }
+
 
       this._service.registerClient(body).subscribe(
         response => {
@@ -117,7 +119,6 @@ export class AdminAdminClientComponent implements OnInit {
         nombreComercial: this.nombreComercial,
         correo: this.correoElectronicoEmpresa,
         tipoCliente: "juridical"
-       
       }
 
       this._service.registerClient(body).subscribe(

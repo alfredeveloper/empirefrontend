@@ -14,7 +14,7 @@ export class ServiceService {
   ) { }
 
   loginAdmin(data: Object): Observable<any> {
-    return this.http.post<any>(`${environment.apiUrl}/api/login/admin`, data);
+    return this.http.post<any>(`${environment.apiUrl}/api/login/manager`, data);
   }
 
   login(data: Object): Observable<any> {

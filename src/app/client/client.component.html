@@ -32,7 +32,7 @@
                     
                     Ayuda 
                 </mat-list-item>
-                <mat-list-item  [routerLink]="['/iniciar-sesion']" (click)="sidenav.close()"> 
+                <mat-list-item (click)="cerrarSesion()" [routerLink]="['/iniciar-sesion']" (click)="sidenav.close()"> 
                     <mat-icon class="mat-drawer-icon" aria-hidden="false" aria-label="Example home icon">exit_to_app</mat-icon>
                     
                     Cerrar sesión 

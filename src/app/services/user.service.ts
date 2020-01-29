@@ -12,6 +12,9 @@ export class UserService {
   usuario: any;
   token: string;
 
+  usuarioAdmin: any;
+  tokenAdmin: string;
+
   constructor(
     private http: HttpClient,
   ) { 
@@ -24,17 +27,33 @@ export class UserService {
   }
 
   estaLogueadoAdmin() {
-    return (this.)
+    return ( this.tokenAdmin.length > 5 ) ? true : false;
   }
 
   cargarStorage() {
 
     if ( localStorage.getItem('token')) {
+    
       this.token = localStorage.getItem('token');
       this.usuario = JSON.parse( localStorage.getItem('currentUser') );
+    
     } else {
+
       this.token = '';
       this.usuario = null;
+    
+    }
+
+    if ( localStorage.getItem('tokenAdmin')) {
+    
+      this.tokenAdmin = localStorage.getItem('tokenAdmin');
+      this.usuarioAdmin = JSON.parse( localStorage.getItem('currentUserAdmin') );
+    
+    } else {
+
+      this.tokenAdmin = '';
+      this.usuarioAdmin = null;
+    
     }
 
   }

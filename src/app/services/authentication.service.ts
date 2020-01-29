@@ -50,6 +50,8 @@ export class AuthenticationService {
     );
   }
 
+  
+
   logout() {
     localStorage.removeItem('currentUser');
     localStorage.removeItem('token');
@@ -63,19 +65,18 @@ export class AuthenticationService {
 
   loginAdmin(data): Observable<any> {
     
-    return this.http.post<any>(`${environment.apiUrl}/api/login/admin`, data)
+    return this.http.post<any>(`${environment.apiUrl}/api/login/manager`, data)
     .pipe(map(response => {
-      
+      console.log('rsponse', response)
       if (response.status) {
         localStorage.setItem('currentUserAdmin', JSON.stringify(response.data));
         localStorage.setItem('tokenAdmin', response.token);
-        localStorage.setItem('authAdmin', 'true'); // Change for verify token
+        localStorage.setItem('authAdmin', 'true');
         localStorage.setItem('mapAdmin', 'true');
-        localStorage.setItem('clientId', response.clientId)
-        localStorage.setItem('clientDirectId', response.clientDirectId)
+        localStorage.setItem('managerId', response.data._id)
+        console.log('asdfgas')
         return response;
       }
-      console.log('enter room');
       return response;
     })
     );
@@ -86,8 +87,7 @@ export class AuthenticationService {
     localStorage.removeItem('tokenAdmin');
     localStorage.removeItem('mapAdmin');
     localStorage.removeItem('authAdmin');
-    localStorage.removeItem('clientId');
-    localStorage.removeItem('clientDirectId');
+    localStorage.removeItem('managerId');
 
     this.router.navigate(['/admin'])
 
